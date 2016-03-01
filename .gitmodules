@@ -1,0 +1,6 @@
+[submodule "Carthage/Checkouts/KeychainAccess"]
+	path = Carthage/Checkouts/KeychainAccess
+	url = https://github.com/kishikawakatsumi/KeychainAccess.git
+[submodule "Carthage/Checkouts/OAuthSwift"]
+	path = Carthage/Checkouts/OAuthSwift
+	url = https://github.com/OAuthSwift/OAuthSwift.git
