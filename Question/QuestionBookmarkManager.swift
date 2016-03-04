@@ -11,5 +11,6 @@ import OAuthSwift
 import KeychainAccess
 
 class QuestionBookmarkManager {
-    
+    static let sharedManager = QuestionBookmarkManager()
+ 
 }
