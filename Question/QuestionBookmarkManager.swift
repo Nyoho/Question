@@ -10,13 +10,14 @@ import Foundation
 import OAuthSwift
 import KeychainAccess
 
-class QuestionBookmarkManager {
+public class QuestionBookmarkManager {
     var consumerKey = ""
     var consumerSecret = ""
+    var authorized = false
     
-    static let sharedManager = QuestionBookmarkManager()
+    public static let sharedManager = QuestionBookmarkManager()
 
-    func setConsumerKey(consumerKey: String, consumerSecret: String) {
+    public func setConsumerKey(consumerKey: String, consumerSecret: String) {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
     }
