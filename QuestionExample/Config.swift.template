@@ -1,0 +1,11 @@
+//
+//  Config.swift.template
+//  copy this as Config.swift
+//
+
+import Foundation
+
+struct Config {
+    static let consumerKey = ""
+    static let consumerSecret = ""
+}
