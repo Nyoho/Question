@@ -17,11 +17,21 @@ public class QuestionBookmarkManager {
     var consumerSecret = ""
     var authorized = false
     
-    static let sharedManager = QuestionBookmarkManager()
-    public class func sharedManager() -> QuestionBookmarkManager {
-        return questionBookmarkManagerInstance
+    var oauthswift = OAuth1Swift(
+        consumerKey:     "consumerKey",
+        consumerSecret:  "consumerSecret",
+        requestTokenUrl: "https://www.hatena.com/oauth/initiate?scope=read_public,write_public",
+        authorizeUrl:    "https://www.hatena.ne.jp/oauth/authorize",
+        accessTokenUrl:  "https://www.hatena.com/oauth/token"
+    )
+
+    class func sharedManager() -> QuestionBookmarkManager {
+        struct Static {
+            static let instance = QuestionBookmarkManager()
+        }
+        return Static.instance
     }
-    
+
     public func setConsumerKey(consumerKey: String, consumerSecret: String) {
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret

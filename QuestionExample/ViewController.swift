@@ -13,7 +13,8 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        QuestionBookmarkManager.sharedManager.setConsumerKey("", consumerSecret: "")
+
+        QuestionBookmarkManager.sharedManager.setConsumerKey(Config.consumerKey, consumerSecret: Config.consumerSecret)
         
         // Do any additional setup after loading the view.
     }
