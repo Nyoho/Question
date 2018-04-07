@@ -25,7 +25,7 @@ public class QuestionBookmarkManager {
         accessTokenUrl:  "https://www.hatena.com/oauth/token"
     )
 
-    class func sharedManager() -> QuestionBookmarkManager {
+    public class func sharedManager() -> QuestionBookmarkManager {
         struct Static {
             static let instance = QuestionBookmarkManager()
         }

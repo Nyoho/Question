@@ -14,12 +14,12 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        QuestionBookmarkManager.sharedManager.setConsumerKey(Config.consumerKey, consumerSecret: Config.consumerSecret)
+        QuestionBookmarkManager.sharedManager().setConsumerKey(consumerKey: Config.consumerKey, consumerSecret: Config.consumerSecret)
         
         // Do any additional setup after loading the view.
     }
 
-    override var representedObject: AnyObject? {
+    override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
