@@ -13,6 +13,8 @@
 		55048C571C8E8FD4000A3A64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55048C551C8E8FD4000A3A64 /* Main.storyboard */; };
 		55048C621C8E8FD4000A3A64 /* QuestionExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55048C611C8E8FD4000A3A64 /* QuestionExampleTests.swift */; };
 		55048C6D1C8E8FD4000A3A64 /* QuestionExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55048C6C1C8E8FD4000A3A64 /* QuestionExampleUITests.swift */; };
+		55630176207847E3002793E4 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2461C855C10001160C7 /* KeychainAccess.framework */; };
+		55630177207847ED002793E4 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2471C855C10001160C7 /* OAuthSwift.framework */; };
 		5581956C1CEB7315005AA34E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581956B1CEB7315005AA34E /* Config.swift */; };
 		55CFE2291C85588D001160C7 /* Question.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CFE2281C85588D001160C7 /* Question.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55CFE2301C85588D001160C7 /* Question.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2251C85588D001160C7 /* Question.framework */; };
@@ -81,6 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55630177207847ED002793E4 /* OAuthSwift.framework in Frameworks */,
+				55630176207847E3002793E4 /* KeychainAccess.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +488,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)";
 				INFOPLIST_FILE = QuestionExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionExample;
@@ -498,6 +503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)";
 				INFOPLIST_FILE = QuestionExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionExample;
