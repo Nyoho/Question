@@ -16,6 +16,8 @@
 		55630176207847E3002793E4 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2461C855C10001160C7 /* KeychainAccess.framework */; };
 		55630177207847ED002793E4 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2471C855C10001160C7 /* OAuthSwift.framework */; };
 		5581956C1CEB7315005AA34E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581956B1CEB7315005AA34E /* Config.swift */; };
+		55895DAD2079E64400E711AE /* QuestionAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */; };
+		55895DAE2079E64400E711AE /* QuestionAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */; };
 		55CFE2291C85588D001160C7 /* Question.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CFE2281C85588D001160C7 /* Question.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55CFE2301C85588D001160C7 /* Question.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2251C85588D001160C7 /* Question.framework */; };
 		55CFE2351C85588D001160C7 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFE2341C85588D001160C7 /* QuestionTests.swift */; };
@@ -65,6 +67,8 @@
 		55048C6C1C8E8FD4000A3A64 /* QuestionExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionExampleUITests.swift; sourceTree = "<group>"; };
 		55048C6E1C8E8FD4000A3A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5581956B1CEB7315005AA34E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAuthViewController.swift; sourceTree = "<group>"; };
+		55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionAuthViewController.xib; sourceTree = "<group>"; };
 		55CFE2251C85588D001160C7 /* Question.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Question.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CFE2281C85588D001160C7 /* Question.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		55CFE22A1C85588D001160C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 				55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */,
 				55CFE2281C85588D001160C7 /* Question.h */,
 				55CFE22A1C85588D001160C7 /* Info.plist */,
+				55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */,
+				55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */,
 			);
 			path = Question;
 			sourceTree = "<group>";
@@ -395,6 +401,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55895DAE2079E64400E711AE /* QuestionAuthViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55895DAD2079E64400E711AE /* QuestionAuthViewController.swift in Sources */,
 				55CFE24B1C855DA2001160C7 /* QuestionBookmarkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +499,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)";
 				INFOPLIST_FILE = QuestionExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -506,6 +515,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)";
 				INFOPLIST_FILE = QuestionExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -673,7 +683,7 @@
 				INFOPLIST_FILE = Question/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.Question;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -700,7 +710,7 @@
 				INFOPLIST_FILE = Question/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.Question;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

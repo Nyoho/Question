@@ -14,11 +14,29 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        QuestionBookmarkManager.sharedManager().setConsumerKey(consumerKey: Config.consumerKey, consumerSecret: Config.consumerSecret)
-        
-        // Do any additional setup after loading the view.
+        QuestionBookmarkManager.shared.setConsumerKey(consumerKey: Config.consumerKey, consumerSecret: Config.consumerSecret)
     }
 
+    @IBAction func performAuth(_ sender: Any) {
+        if !QuestionBookmarkManager.shared.authorized {
+            let bundle = Bundle(identifier: "jp.nyoho.Question")!
+            if let vc = QuestionAuthViewController.init(nibName: "QuestionAuthViewController", bundle: bundle) {
+                self.presentViewControllerAsModalWindow(vc)
+                QuestionBookmarkManager.shared.auth(viewController: vc)
+            }
+        } else {
+            print("You already authed.")
+        }
+    }
+    
+    @IBAction func signOut(_ sender: Any) {
+        QuestionBookmarkManager.shared.signOut()
+    }
+    
+    @IBAction func getBookmark(_ sender: Any) {
+        QuestionBookmarkManager.shared.getMyBookmark(self)
+    }
+    
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
