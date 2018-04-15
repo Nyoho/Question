@@ -27,6 +27,13 @@
 		55CFE2491C855C10001160C7 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2471C855C10001160C7 /* OAuthSwift.framework */; };
 		55CFE24B1C855DA2001160C7 /* QuestionBookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */; };
 		55CFE24C1C856104001160C7 /* QuestionBookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */; };
+		55E7089220834C6C00A614A8 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089120834C6C00A614A8 /* Bookmark.swift */; };
+		55E7089420834C9300A614A8 /* QuestionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089320834C9300A614A8 /* QuestionResponse.swift */; };
+		55E7089620834D8F00A614A8 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089520834D8F00A614A8 /* Result.swift */; };
+		55E708982083526400A614A8 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E708972083526400A614A8 /* Entry.swift */; };
+		55E7089A2083526C00A614A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E708992083526C00A614A8 /* User.swift */; };
+		55E7089C2083527600A614A8 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089B2083527600A614A8 /* Tag.swift */; };
+		55E7089E2083661600A614A8 /* QuestionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089D2083661600A614A8 /* QuestionError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +87,13 @@
 		55CFE2461C855C10001160C7 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = "../../Library/Developer/Xcode/DerivedData/Question-gakgneaoyehinvfoovaotewrzrpv/Build/Products/Debug/KeychainAccess.framework"; sourceTree = "<group>"; };
 		55CFE2471C855C10001160C7 /* OAuthSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuthSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Question-gakgneaoyehinvfoovaotewrzrpv/Build/Products/Debug/OAuthSwift.framework"; sourceTree = "<group>"; };
 		55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionBookmarkManager.swift; sourceTree = "<group>"; };
+		55E7089120834C6C00A614A8 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
+		55E7089320834C9300A614A8 /* QuestionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionResponse.swift; sourceTree = "<group>"; };
+		55E7089520834D8F00A614A8 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		55E708972083526400A614A8 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		55E708992083526C00A614A8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		55E7089B2083527600A614A8 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		55E7089D2083661600A614A8 /* QuestionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,8 +204,12 @@
 				55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */,
 				55CFE2281C85588D001160C7 /* Question.h */,
 				55CFE22A1C85588D001160C7 /* Info.plist */,
+				55E7089020834C0400A614A8 /* Responses */,
+				55E7088F20834BD700A614A8 /* Models */,
 				55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */,
 				55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */,
+				55E7089520834D8F00A614A8 /* Result.swift */,
+				55E7089D2083661600A614A8 /* QuestionError.swift */,
 			);
 			path = Question;
 			sourceTree = "<group>";
@@ -214,6 +232,25 @@
 				55CFE2411C855B41001160C7 /* OAuthSwift.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		55E7088F20834BD700A614A8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				55E7089120834C6C00A614A8 /* Bookmark.swift */,
+				55E708972083526400A614A8 /* Entry.swift */,
+				55E708992083526C00A614A8 /* User.swift */,
+				55E7089B2083527600A614A8 /* Tag.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		55E7089020834C0400A614A8 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				55E7089320834C9300A614A8 /* QuestionResponse.swift */,
+			);
+			path = Responses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,8 +500,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55E7089C2083527600A614A8 /* Tag.swift in Sources */,
+				55E708982083526400A614A8 /* Entry.swift in Sources */,
+				55E7089420834C9300A614A8 /* QuestionResponse.swift in Sources */,
+				55E7089620834D8F00A614A8 /* Result.swift in Sources */,
 				55895DAD2079E64400E711AE /* QuestionAuthViewController.swift in Sources */,
 				55CFE24B1C855DA2001160C7 /* QuestionBookmarkManager.swift in Sources */,
+				55E7089220834C6C00A614A8 /* Bookmark.swift in Sources */,
+				55E7089A2083526C00A614A8 /* User.swift in Sources */,
+				55E7089E2083661600A614A8 /* QuestionError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
