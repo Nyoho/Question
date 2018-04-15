@@ -16,7 +16,7 @@ public class QuestionBookmarkManager {
     var consumerKey = ""
     var consumerSecret = ""
     public var authorized = false
-    let keychain = Keychain(service: "jp.nyoho.Question")
+    let keychain = Keychain()
     var username = ""
     var displayName = ""
     
@@ -49,12 +49,21 @@ public class QuestionBookmarkManager {
     }
     
     func checkAuthed() {
-        if let token = keychain["oauthToken"], let tokenSecret = keychain["oauthTokenSecret"] {
-            oauthswift.client.credential.oauthToken = token
-            oauthswift.client.credential.oauthTokenSecret = tokenSecret
-            authorized = true
+        if let username = UserDefaults.standard.string(forKey: "urlName") {
+            self.username = username
+            if let data = keychain[data: username] {
+                do {
+                    let credential = try JSONDecoder().decode(OAuthSwiftCredential.self, from: data)
+                    oauthswift.client = OAuthSwiftClient(credential: credential)
+                    self.displayName = UserDefaults.standard.string(forKey: "displayName") ?? ""
+                    authorized = true
+                } catch {
+                    print("'Cannot retrieve your credential' Error: \(error)")
+                }
+            }
         }
     }
+    
     public func auth(viewController: QuestionAuthViewController) {
         oauthswift.authorizeURLHandler = viewController
         oauthswift.authorize(
@@ -63,14 +72,18 @@ public class QuestionBookmarkManager {
                 print("Authentification succeeded.")
                 if let n = parameters["url_name"] as? String {
                     self.username = n
+                    UserDefaults.standard.set(n, forKey: "urlName")
                 }
                 if let n = parameters["display_name"] as? String {
                     self.displayName = n
+                    UserDefaults.standard.set(n, forKey: "displayName")
                 }
-                self.keychain["oauthToken"] = credential.oauthToken
-                self.keychain["oauthTokenSecret"] = credential.oauthTokenSecret
-                self.keychain["url_name"] = self.username
-                self.keychain["display_name"] = self.displayName
+                do {
+                    let d = try JSONEncoder().encode(credential)
+                    self.keychain[data: self.username] = d
+                } catch {
+                    print("Error: \(error)")
+                }
                 self.authorized = true
         },
             failure: { error in
@@ -80,10 +93,7 @@ public class QuestionBookmarkManager {
     }
 
     public func signOut() {
-        keychain["oauthToken"] = nil
-        keychain["oauthTokenSecret"] = nil
-        keychain["url_name"] = nil
-        keychain["display_name"] = nil
+        keychain["credential"] = nil
         if let vc = QuestionAuthViewController.init(nibName: "QuestionAuthViewController", bundle: Bundle.main) {
             vc.clearCookiesAndSessions()
         }
@@ -92,22 +102,109 @@ public class QuestionBookmarkManager {
         authorized = false
     }
     
-    public func getMyBookmark(_ sender: Any) {
-//        print("token:")
-//        print(oauthswift.client.credential.oauthToken)
-//        print("token secret:")
-//        print(oauthswift.client.credential.oauthTokenSecret)
-        
+    public func getMyBookmark(url: String) {
         oauthswift.client.get(
             "http://api.b.hatena.ne.jp/1/my/bookmark",
-            parameters: ["url": "http://www.slideshare.net/okapies/reactive-architecture-20160218-58403521"],
+            parameters: ["url": url],
             headers: nil,
             success: { response in
-                let dataString = String(data: response.data, encoding: String.Encoding.utf8)
-                print("\(String(describing: dataString))")
-        }, failure: { error in
-            print(error)
+                do {
+                    let data = response.data
+                    if let s = String(bytes: data, encoding: String.Encoding.utf8) {
+                        print(s)
+                    }
+                    let b = try Bookmark(response: response.response, json: data)
+                    print(b)
+                } catch {
+                    print("JSON conversion failed in JSONDecoder", error.localizedDescription)
+                }
+        },
+            failure: { error in
+                switch error { // error is OAuthSwiftError
+                case .requestError(let e, let request):
+                    //requestError[Error Domain=NSURLErrorDomain Code=404 "" UserInfo={Response-Body={"url":"...","message":"Bookmark is not found"}, NSErrorFailingURLKey=http://api.b.hatena.ne.jp/1/my/bookmark?url=..., Response-Headers={...
+                    print("A request error:")
+                    if let s =  (e as NSError).userInfo["Response-Body"] {
+                        print(s)
+                    }
+                default:
+                    print("The others' error:")
+                    print(error)
+                }
         })
     }
+}
+
+// MARK:-
+
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case head = "HEAD"
+    case delete = "DELETE"
+    case patch = "PATCH"
+    case trace = "TRACE"
+    case options = "OPTIONS"
+    case connect = "CONNECT"
+}
+
+protocol QuestionRequest {
+    associatedtype Response: Decodable
     
+    var baseURL: URL { get }
+    var path: String { get }
+    var method: HTTPMethod { get }
+    var queryItems: [URLQueryItem] { get }
+    var credential: OAuthSwiftCredential { get set }
+}
+
+extension QuestionRequest {
+    var baseURL: URL {
+        return URL(string: "http://api.b.hatena.ne.jp/1")!
+    }
+}
+    
+public protocol QuestionResponse {
+    init(response: HTTPURLResponse, json: Data) throws
+}
+
+extension QuestionResponse where Self: Decodable {
+    public init(response: HTTPURLResponse, json: Data) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        self = try decoder.decode(Self.self, from: json)
+    }
+}
+
+public struct Bookmark: Decodable, QuestionResponse {
+    let comment: String
+    let commentRaw: String
+    let createdDatetime: Date
+    let createdEpoch: UInt
+    let user: String
+    let permalink: URL
+    let isPrivate: Bool
+    let tags: [String]
+    let eid: UInt
+    let favorites: [Bookmark]?
+
+    private enum CodingKeys: String, CodingKey {
+        case comment
+        case commentRaw = "comment_raw"
+        case createdDatetime = "created_datetime"
+        case createdEpoch = "created_epoch"
+        case user
+        case permalink
+        case isPrivate = "private"
+        case tags
+        case eid
+        case favorites
+    }
+}
+
+enum QuestionClientError: Error {
+    case connectionError(Error)
+    case responseParseError(Error)
+    case apiError(Error)
 }

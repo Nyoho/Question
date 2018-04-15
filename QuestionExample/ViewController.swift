@@ -11,6 +11,8 @@ import Question
 
 class ViewController: NSViewController {
 
+    @IBOutlet weak var urlField: NSTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,7 +36,7 @@ class ViewController: NSViewController {
     }
     
     @IBAction func getBookmark(_ sender: Any) {
-        QuestionBookmarkManager.shared.getMyBookmark(self)
+        QuestionBookmarkManager.shared.getMyBookmark(url: urlField.stringValue)
     }
     
     override var representedObject: Any? {
