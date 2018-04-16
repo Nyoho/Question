@@ -13,3 +13,7 @@ public enum QuestionError: Error {
     case responseParseError(Error)
     case apiError(Error)
 }
+
+public struct QuestionAPIError: Error, Decodable {
+
+}
