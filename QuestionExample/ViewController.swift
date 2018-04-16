@@ -24,7 +24,7 @@ class ViewController: NSViewController {
             let bundle = Bundle(identifier: "jp.nyoho.Question")!
             if let vc = QuestionAuthViewController.init(nibName: "QuestionAuthViewController", bundle: bundle) {
                 self.presentViewControllerAsModalWindow(vc)
-                QuestionBookmarkManager.shared.auth(viewController: vc)
+                QuestionBookmarkManager.shared.authenticate(viewController: vc)
             }
         } else {
             print("You already authed.")
@@ -36,7 +36,15 @@ class ViewController: NSViewController {
     }
     
     @IBAction func getBookmark(_ sender: Any) {
-        QuestionBookmarkManager.shared.getMyBookmark(url: urlField.stringValue)
+        guard let url = URL(string: urlField.stringValue) else { return }
+        QuestionBookmarkManager.shared.getMyBookmark(url: url, completion: { (result) in
+            switch result {
+            case .success(let bookmark):
+                print("Bookmark object: \(bookmark)")
+            case .failure(let error):
+                print("error \(error)")
+            }
+        })
     }
     
     override var representedObject: Any? {

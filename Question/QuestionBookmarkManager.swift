@@ -64,7 +64,7 @@ public class QuestionBookmarkManager {
         }
     }
     
-    public func auth(viewController: QuestionAuthViewController) {
+    public func authenticate(viewController: QuestionAuthViewController) {
         oauthswift.authorizeURLHandler = viewController
         oauthswift.authorize(
             withCallbackURL: URL(string: "https://nyoho.jp/oauth/")!,
@@ -92,7 +92,7 @@ public class QuestionBookmarkManager {
         })
     }
 
-    public func signOut() {
+    public func signOut() { // rename to logout?
         keychain["credential"] = nil
         if let vc = QuestionAuthViewController.init(nibName: "QuestionAuthViewController", bundle: Bundle.main) {
             vc.clearCookiesAndSessions()
@@ -102,19 +102,29 @@ public class QuestionBookmarkManager {
         authorized = false
     }
     
-    public func getMyBookmark(url: String) {
-        oauthswift.client.get(
-            "http://api.b.hatena.ne.jp/1/my/bookmark",
-            parameters: ["url": url],
+    public func send<Request: QuestionRequest>(request: Request, completion: @escaping (Result<Request.Response, QuestionError>) -> Void) {
+        // TODO: add request.body
+
+        let oauthswiftMethod = { (method: HTTPMethod) -> OAuthSwiftHTTPRequest.Method in
+            switch method {
+            case .post:
+                return .POST
+            default:
+                return .GET
+            }
+        }(request.method)
+
+        oauthswift.client.request(
+            request.baseURL.absoluteString + request.path,
+            method: oauthswiftMethod,
+            parameters: request.queryItems,
             headers: nil,
+            body: nil,
             success: { response in
                 do {
                     let data = response.data
-                    if let s = String(bytes: data, encoding: String.Encoding.utf8) {
-                        print(s)
-                    }
-                    let b = try Bookmark(response: response.response, json: data)
-                    print(b)
+                    let b = try request.response(from: data, urlResponse: response.response)
+                    completion(Result.success(b))
                 } catch {
                     print("JSON conversion failed in JSONDecoder", error.localizedDescription)
                 }
@@ -127,40 +137,15 @@ public class QuestionBookmarkManager {
                     if let s =  (e as NSError).userInfo["Response-Body"] {
                         print(s)
                     }
+                    completion(Result.failure(.connectionError))
                 default:
                     print("The others' error:")
                     print(error)
                 }
         })
     }
-}
 
-// MARK:-
-
-enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
-    case put = "PUT"
-    case head = "HEAD"
-    case delete = "DELETE"
-    case patch = "PATCH"
-    case trace = "TRACE"
-    case options = "OPTIONS"
-    case connect = "CONNECT"
-}
-
-protocol QuestionRequest {
-    associatedtype Response: Decodable
-    
-    var baseURL: URL { get }
-    var path: String { get }
-    var method: HTTPMethod { get }
-    var queryItems: [URLQueryItem] { get }
-    var credential: OAuthSwiftCredential { get set }
-}
-
-extension QuestionRequest {
-    var baseURL: URL {
-        return URL(string: "http://api.b.hatena.ne.jp/1")!
+    public func getMyBookmark(url: URL, completion: @escaping (Result<Bookmark, QuestionError>) -> Void) {
+        send(request: GetBookmarkRequest(url: url), completion: completion)
     }
 }

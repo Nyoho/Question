@@ -34,6 +34,8 @@
 		55E7089A2083526C00A614A8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E708992083526C00A614A8 /* User.swift */; };
 		55E7089C2083527600A614A8 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089B2083527600A614A8 /* Tag.swift */; };
 		55E7089E2083661600A614A8 /* QuestionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089D2083661600A614A8 /* QuestionError.swift */; };
+		55E708A120836A3400A614A8 /* QuestionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E708A020836A3400A614A8 /* QuestionRequest.swift */; };
+		55E708A320836AF600A614A8 /* BookmarkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E708A220836AF600A614A8 /* BookmarkRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		55E708992083526C00A614A8 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		55E7089B2083527600A614A8 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		55E7089D2083661600A614A8 /* QuestionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionError.swift; sourceTree = "<group>"; };
+		55E708A020836A3400A614A8 /* QuestionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRequest.swift; sourceTree = "<group>"; };
+		55E708A220836AF600A614A8 /* BookmarkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +208,7 @@
 				55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */,
 				55CFE2281C85588D001160C7 /* Question.h */,
 				55CFE22A1C85588D001160C7 /* Info.plist */,
+				55E7089F20836A1A00A614A8 /* Requests */,
 				55E7089020834C0400A614A8 /* Responses */,
 				55E7088F20834BD700A614A8 /* Models */,
 				55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */,
@@ -251,6 +256,47 @@
 				55E7089320834C9300A614A8 /* QuestionResponse.swift */,
 			);
 			path = Responses;
+			sourceTree = "<group>";
+		};
+		55E7089F20836A1A00A614A8 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				55E708A420836AFA00A614A8 /* Bookmark */,
+				55E708A520836B1900A614A8 /* Entry */,
+				55E708A620836B1F00A614A8 /* User */,
+				55E708A720836B2300A614A8 /* Tag */,
+				55E708A020836A3400A614A8 /* QuestionRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		55E708A420836AFA00A614A8 /* Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+				55E708A220836AF600A614A8 /* BookmarkRequest.swift */,
+			);
+			path = Bookmark;
+			sourceTree = "<group>";
+		};
+		55E708A520836B1900A614A8 /* Entry */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entry;
+			sourceTree = "<group>";
+		};
+		55E708A620836B1F00A614A8 /* User */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		55E708A720836B2300A614A8 /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tag;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -501,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55E7089C2083527600A614A8 /* Tag.swift in Sources */,
+				55E708A120836A3400A614A8 /* QuestionRequest.swift in Sources */,
 				55E708982083526400A614A8 /* Entry.swift in Sources */,
 				55E7089420834C9300A614A8 /* QuestionResponse.swift in Sources */,
 				55E7089620834D8F00A614A8 /* Result.swift in Sources */,
@@ -509,6 +556,7 @@
 				55E7089220834C6C00A614A8 /* Bookmark.swift in Sources */,
 				55E7089A2083526C00A614A8 /* User.swift in Sources */,
 				55E7089E2083661600A614A8 /* QuestionError.swift in Sources */,
+				55E708A320836AF600A614A8 /* BookmarkRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
