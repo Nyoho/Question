@@ -137,7 +137,7 @@ public class QuestionBookmarkManager {
                     if let s =  (e as NSError).userInfo["Response-Body"] {
                         print(s)
                     }
-                    completion(Result.failure(.connectionError))
+                    completion(Result.failure(.connectionError(e)))
                 default:
                     print("The others' error:")
                     print(error)
@@ -148,4 +148,10 @@ public class QuestionBookmarkManager {
     public func getMyBookmark(url: URL, completion: @escaping (Result<Bookmark, QuestionError>) -> Void) {
         send(request: GetBookmarkRequest(url: url), completion: completion)
     }
+
+    public func postMyBookmark(url: URL, comment: String, tags: [String] = [], postTwitter: Bool = false, postFacebook: Bool = false, postMixi: Bool = false, postEvernote: Bool = false, sendMail: Bool = false, isPrivate: Bool = false, completion: @escaping (Result<Bookmark, QuestionError>) -> Void) {
+        let request = PostBookmarkRequest(url: url, comment: comment, tags: tags, postTwitter: postTwitter, postFacebook: postFacebook, postMixi: postMixi, postEvernote: postEvernote, sendMail: sendMail, isPrivate: isPrivate)
+        send(request: request, completion: completion)
+    }
+
 }

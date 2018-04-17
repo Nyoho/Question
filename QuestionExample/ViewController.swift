@@ -12,6 +12,7 @@ import Question
 class ViewController: NSViewController {
 
     @IBOutlet weak var urlField: NSTextField!
+    @IBOutlet weak var commentField: NSTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,18 @@ class ViewController: NSViewController {
         })
     }
     
+    @IBAction func postBookmark(_ sender: Any) {
+        guard let url = URL(string: urlField.stringValue) else { return }
+        let comment = commentField.stringValue
+        QuestionBookmarkManager.shared.postMyBookmark(url: url, comment: comment, completion: { (result) in
+            switch result {
+            case .success(let bookmark):
+                print("Bookmark object: \(bookmark)")
+            case .failure(let error):
+                print("error \(error)")
+            }
+        })
+    }
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
