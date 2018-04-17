@@ -70,21 +70,21 @@ public class QuestionBookmarkManager {
             withCallbackURL: URL(string: "https://nyoho.jp/oauth/")!,
             success: { credential, response, parameters in
                 print("Authentification succeeded.")
-                if let n = parameters["url_name"] as? String {
-                    self.username = n
-                    UserDefaults.standard.set(n, forKey: "urlName")
-                }
-                if let n = parameters["display_name"] as? String {
-                    self.displayName = n
-                    UserDefaults.standard.set(n, forKey: "displayName")
-                }
+                guard let name = parameters["url_name"] as? String else { return }
+                self.username = name
+                UserDefaults.standard.set(name, forKey: "urlName")
+                
+                guard let displayName = parameters["display_name"] as? String else { return }
+                self.displayName = displayName
+                UserDefaults.standard.set(displayName, forKey: "displayName")
+                
                 do {
                     let d = try JSONEncoder().encode(credential)
                     self.keychain[data: self.username] = d
+                    self.authorized = true
                 } catch {
                     print("Error: \(error)")
                 }
-                self.authorized = true
         },
             failure: { error in
                 print("Authentification failed.")
