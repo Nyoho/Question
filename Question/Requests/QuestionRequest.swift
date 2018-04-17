@@ -26,7 +26,7 @@ public protocol QuestionRequest {
     var baseURL: URL { get }
     var path: String { get }
     var method: HTTPMethod { get }
-    var queryItems: [String:String] { get } // not [URLQueryItem]
+    var queryItems: [String:Any] { get } // not [URLQueryItem]
 }
 
 public extension QuestionRequest {
@@ -43,5 +43,9 @@ public extension QuestionRequest {
         } else {
             throw try decoder.decode(QuestionAPIError.self, from: data)
         }
+    }
+    
+    func questionBool(_ b: Bool) -> Int {
+        return b ? 1 : 0
     }
 }
