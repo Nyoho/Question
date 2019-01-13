@@ -3,3 +3,5 @@
 Question is a framework for Hatena service (especially, Hatena Bookmark) written in Swift.
 
 Question は、はてなのサービス、特にはてなブックマークを扱うライブラリです。
+
+Implementating [[http://developer.hatena.ne.jp/ja/documents/bookmark/apis/rest][はてなブックマーク REST API]].
