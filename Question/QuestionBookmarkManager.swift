@@ -94,9 +94,9 @@ public class QuestionBookmarkManager {
 
     public func signOut() { // rename to logout?
         keychain["credential"] = nil
-        if let vc = QuestionAuthViewController.init(nibName: "QuestionAuthViewController", bundle: Bundle.main) {
-            vc.clearCookiesAndSessions()
-        }
+        let vc = QuestionAuthViewController(nibName: "QuestionAuthViewController", bundle: Bundle.main)
+        vc.clearCookiesAndSessions()
+
         oauthswift.client.credential.oauthToken = ""
         oauthswift.client.credential.oauthTokenSecret = ""
         authorized = false

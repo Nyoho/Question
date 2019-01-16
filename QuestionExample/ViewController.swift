@@ -23,10 +23,10 @@ class ViewController: NSViewController {
     @IBAction func performAuth(_ sender: Any) {
         if !QuestionBookmarkManager.shared.authorized {
             let bundle = Bundle(identifier: "jp.nyoho.Question")!
-            if let vc = QuestionAuthViewController.init(nibName: "QuestionAuthViewController", bundle: bundle) {
-                self.presentViewControllerAsModalWindow(vc)
-                QuestionBookmarkManager.shared.authenticate(viewController: vc)
-            }
+            let vc = QuestionAuthViewController(nibName: "QuestionAuthViewController", bundle: bundle)
+            self.presentAsModalWindow(vc)
+            QuestionBookmarkManager.shared.authenticate(viewController: vc)
+            print(vc)
         } else {
             print("You already authed.")
         }
