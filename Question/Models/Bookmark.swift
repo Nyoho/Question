@@ -9,16 +9,16 @@
 import Foundation
 
 public struct Bookmark: Decodable, QuestionResponse {
-    let comment: String
-    let commentRaw: String
-    let createdDatetime: Date
-    let createdEpoch: UInt
-    let user: String
-    let permalink: URL
-    let isPrivate: Bool
-    let tags: [String]
-    let eid: UInt
-    let favorites: [Bookmark]?
+    public let comment: String
+    public let commentRaw: String
+    public let createdDatetime: Date
+    public let createdEpoch: UInt
+    public let user: String
+    public let permalink: URL
+    public let isPrivate: Bool
+    public let tags: [String]
+    public let eid: String
+    public let favorites: [Bookmark]?
     
     private enum CodingKeys: String, CodingKey {
         case comment

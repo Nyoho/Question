@@ -9,13 +9,13 @@
 import Foundation
 
 public struct User: Decodable, QuestionResponse {
-    let name: String
-    let isPlususer: Bool
-    let isPrivate: Bool
-    let isOAuthTwitter: Bool
-    let isOAuthEvernote: Bool
-    let isOAuthFacebook: Bool
-    let isOAuthMixiCheck: Bool
+    public let name: String
+    public let isPlususer: Bool
+    public let isPrivate: Bool
+    public let isOAuthTwitter: Bool
+    public let isOAuthEvernote: Bool
+    public let isOAuthFacebook: Bool
+    public let isOAuthMixiCheck: Bool
     
     private enum CodingKeys: String, CodingKey {
         case name

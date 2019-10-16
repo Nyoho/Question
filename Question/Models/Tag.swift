@@ -9,10 +9,10 @@
 import Foundation
 
 public struct Tag: Decodable, QuestionResponse {
-    let count: UInt
-    let modifiedEpoch: UInt
-    let modifiedDatetime: Date
-    let tag: String
+    public let count: UInt
+    public let modifiedEpoch: UInt
+    public let modifiedDatetime: Date
+    public let tag: String
     
     private enum CodingKeys: String, CodingKey {
         case count

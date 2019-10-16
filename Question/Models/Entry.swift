@@ -9,12 +9,12 @@
 import Foundation
 
 public struct Entry: Decodable, QuestionResponse {
-    let title: String
-    let url: URL
-    let entryURL: URL
-    let count: UInt
-    let faviconURL: URL
-    let smartphoneAppEntryURL: URL
+    public let title: String
+    public let url: URL
+    public let entryURL: URL
+    public let count: UInt
+    public let faviconURL: URL
+    public let smartphoneAppEntryURL: URL
     
     private enum CodingKeys: String, CodingKey {
         case title
