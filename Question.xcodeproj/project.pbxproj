@@ -184,6 +184,15 @@
 			path = QuestionExampleUITests;
 			sourceTree = "<group>";
 		};
+		5562095623ACA8970059CCF5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */,
+				55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		55CFE21B1C85588D001160C7 = {
 			isa = PBXGroup;
 			children = (
@@ -218,8 +227,7 @@
 				55E7089F20836A1A00A614A8 /* Requests */,
 				55E7089020834C0400A614A8 /* Responses */,
 				55E7088F20834BD700A614A8 /* Models */,
-				55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */,
-				55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */,
+				5562095623ACA8970059CCF5 /* View */,
 				55E7089520834D8F00A614A8 /* Result.swift */,
 				55E7089D2083661600A614A8 /* QuestionError.swift */,
 			);

@@ -36,6 +36,7 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
     }
     
     public func handle(_ url: URL) {
+        print("url: \(url)")
         webView.load(URLRequest(url: url))
     }
 
