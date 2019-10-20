@@ -31,7 +31,7 @@ public protocol QuestionRequest {
 
 public extension QuestionRequest {
     var baseURL: URL {
-        return URL(string: "http://api.b.hatena.ne.jp/1")!
+        return URL(string: "https://bookmark.hatenaapis.com/rest/1")!
     }
     
     func response(from data: Data, urlResponse: URLResponse) throws -> Response {
