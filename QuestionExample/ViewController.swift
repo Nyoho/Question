@@ -42,6 +42,7 @@ class ViewController: NSViewController {
             switch result {
             case .success(let bookmark):
                 print("Bookmark object: \(bookmark)")
+                self.commentField.stringValue = bookmark.commentRaw
             case .failure(let error):
                 print("error \(error)")
             }
