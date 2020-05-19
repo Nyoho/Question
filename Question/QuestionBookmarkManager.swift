@@ -66,9 +66,9 @@ public class QuestionBookmarkManager {
     
     public func authenticate(viewController: QuestionAuthViewController) {
         oauthswift.authorizeURLHandler = viewController
-        oauthswift.authorize(
-            withCallbackURL: URL(string: "https://nyoho.jp/oauth/")!,
-            success: { credential, response, parameters in
+        oauthswift.authorize(withCallbackURL: URL(string: "https://nyoho.jp/oauth/")!) { result in
+            switch result {
+            case .success(let (credential, response, parameters)):
                 print("Authentification succeeded.")
                 guard let name = parameters["url_name"] as? String else { return }
                 self.username = name
@@ -85,11 +85,11 @@ public class QuestionBookmarkManager {
                 } catch {
                     print("Error: \(error)")
                 }
-        },
-            failure: { error in
+            case .failure(let error):
                 print("Authentification failed.")
                 print(error.localizedDescription)
-        })
+            }
+        }
     }
 
     public func signOut() { // rename to logout?
@@ -114,13 +114,13 @@ public class QuestionBookmarkManager {
             }
         }(request.method)
 
-        oauthswift.client.request(
-            request.baseURL.absoluteString + request.path,
-            method: oauthswiftMethod,
-            parameters: request.queryItems,
-            headers: nil,
-            body: nil,
-            success: { response in
+        oauthswift.client.request(request.baseURL.absoluteString + request.path,
+                                  method: oauthswiftMethod,
+                                  parameters: request.queryItems,
+                                  headers: nil,
+                                  body: nil) { result in
+            switch result {
+            case .success(let response):
                 do {
                     let data = response.data
                     let b = try request.response(from: data, urlResponse: response.response)
@@ -128,12 +128,11 @@ public class QuestionBookmarkManager {
                 } catch {
                     print("JSON conversion failed in JSONDecoder", error.localizedDescription)
                 }
-        },
-            failure: { error in
+            case .failure(let error):
                 switch error { // error is OAuthSwiftError
                 case .requestError(let e, let request):
                     //requestError[Error Domain=NSURLErrorDomain Code=404 "" UserInfo={Response-Body={"url":"...","message":"Bookmark is not found"}, NSErrorFailingURLKey=http://api.b.hatena.ne.jp/1/my/bookmark?url=..., Response-Headers={...
-                    print("A request error:")
+                    print("A request error: request = \(request)")
                     if let s =  (e as NSError).userInfo["Response-Body"] {
                         print(s)
                     }
@@ -142,7 +141,8 @@ public class QuestionBookmarkManager {
                     print("The others' error:")
                     print(error)
                 }
-        })
+            }
+        }
     }
 
     public func getMyBookmark(url: URL, completion: @escaping (Result<Bookmark, QuestionError>) -> Void) {
@@ -154,4 +154,34 @@ public class QuestionBookmarkManager {
         send(request: request, completion: completion)
     }
 
+//
+//    public func getMyEntryWithSuccess:(void (^)(HTBMyEntry *myEntry))success
+//    failure:(void (^)(NSError *error))failure;
+//
+//    public func getMyTagsWithSuccess:(void (^)(HTBMyTagsEntry *))success
+//    failure:(void (^)(NSError *error))failure;
+//
+//    public func getBookmarkEntryWithURL:(NSURL *)url
+//    success:(void (^)(HTBBookmarkEntry *entry))success
+//    failure:(void (^)(NSError *error))failure;
+//
+//    public func getCanonicalEntryWithURL:(NSURL *)url
+//    success:(void (^)(HTBCanonicalEntry *canonicalEntry))success
+//    failure:(void (^)(NSError *error))failure;
+//
+//    public func getBookmarkedDataEntryWithURL:(NSURL *)url
+//    success:(void (^)(HTBBookmarkedDataEntry *entry))success
+//    failure:(void (^)(NSError *error))failure;
+//    // Add or edit your bookmark.
+//    public func postBookmarkWithURL:(NSURL *)url
+//    comment:(NSString *)comment
+//    tags:(NSArray *)tags
+//    options:(HatenaBookmarkPOSTOptions)options
+//    success:(void (^)(HTBBookmarkedDataEntry *entry))success
+//    failure:(void (^)(NSError *error))failure;
+//
+//    public func deleteBookmarkWithURL:(NSURL *)url
+//    success:(void (^)(void))success
+//    failure:(void (^)(NSError *error))failure;
+    
 }
