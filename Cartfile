@@ -1,2 +1,2 @@
-github "OAuthSwift/OAuthSwift" "master"
-github "kishikawakatsumi/KeychainAccess"
+github "OAuthSwift/OAuthSwift" "2.1.2"
+github "kishikawakatsumi/KeychainAccess" "v4.2.0"
