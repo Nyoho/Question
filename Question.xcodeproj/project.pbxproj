@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,18 +13,14 @@
 		55048C571C8E8FD4000A3A64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55048C551C8E8FD4000A3A64 /* Main.storyboard */; };
 		55048C621C8E8FD4000A3A64 /* QuestionExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55048C611C8E8FD4000A3A64 /* QuestionExampleTests.swift */; };
 		55048C6D1C8E8FD4000A3A64 /* QuestionExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55048C6C1C8E8FD4000A3A64 /* QuestionExampleUITests.swift */; };
-		55630176207847E3002793E4 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2461C855C10001160C7 /* KeychainAccess.framework */; };
-		55630177207847ED002793E4 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2471C855C10001160C7 /* OAuthSwift.framework */; };
 		5581956C1CEB7315005AA34E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581956B1CEB7315005AA34E /* Config.swift */; };
 		55895DAD2079E64400E711AE /* QuestionAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */; };
 		55895DAE2079E64400E711AE /* QuestionAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */; };
+		55B49A36264D1B4300A1D309 /* OAuthSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55B49A35264D1B4300A1D309 /* OAuthSwift */; };
+		55B49A3E264D1B5A00A1D309 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 55B49A3D264D1B5A00A1D309 /* KeychainAccess */; };
 		55CFE2291C85588D001160C7 /* Question.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CFE2281C85588D001160C7 /* Question.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55CFE2301C85588D001160C7 /* Question.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2251C85588D001160C7 /* Question.framework */; };
 		55CFE2351C85588D001160C7 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFE2341C85588D001160C7 /* QuestionTests.swift */; };
-		55CFE2421C855B41001160C7 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2411C855B41001160C7 /* OAuthSwift.framework */; };
-		55CFE2451C855BDC001160C7 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2441C855BDC001160C7 /* KeychainAccess.framework */; };
-		55CFE2481C855C10001160C7 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2461C855C10001160C7 /* KeychainAccess.framework */; };
-		55CFE2491C855C10001160C7 /* OAuthSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2471C855C10001160C7 /* OAuthSwift.framework */; };
 		55CFE24B1C855DA2001160C7 /* QuestionBookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */; };
 		55CFE24C1C856104001160C7 /* QuestionBookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */; };
 		55E7089220834C6C00A614A8 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089120834C6C00A614A8 /* Bookmark.swift */; };
@@ -85,16 +81,13 @@
 		5581956B1CEB7315005AA34E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAuthViewController.swift; sourceTree = "<group>"; };
 		55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionAuthViewController.xib; sourceTree = "<group>"; };
+		55B49A1E264D18FC00A1D309 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		55CFE2251C85588D001160C7 /* Question.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Question.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CFE2281C85588D001160C7 /* Question.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		55CFE22A1C85588D001160C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55CFE22F1C85588D001160C7 /* QuestionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuestionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CFE2341C85588D001160C7 /* QuestionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTests.swift; sourceTree = "<group>"; };
 		55CFE2361C85588D001160C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55CFE2411C855B41001160C7 /* OAuthSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuthSwift.framework; path = Carthage/Checkouts/OAuthSwift/build/Debug/OAuthSwift.framework; sourceTree = "<group>"; };
-		55CFE2441C855BDC001160C7 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Checkouts/KeychainAccess/Lib/build/Debug/KeychainAccess.framework; sourceTree = "<group>"; };
-		55CFE2461C855C10001160C7 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = "../../Library/Developer/Xcode/DerivedData/Question-gakgneaoyehinvfoovaotewrzrpv/Build/Products/Debug/KeychainAccess.framework"; sourceTree = "<group>"; };
-		55CFE2471C855C10001160C7 /* OAuthSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuthSwift.framework; path = "../../Library/Developer/Xcode/DerivedData/Question-gakgneaoyehinvfoovaotewrzrpv/Build/Products/Debug/OAuthSwift.framework"; sourceTree = "<group>"; };
 		55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionBookmarkManager.swift; sourceTree = "<group>"; };
 		55E7089120834C6C00A614A8 /* Bookmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmark.swift; sourceTree = "<group>"; };
 		55E7089320834C9300A614A8 /* QuestionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionResponse.swift; sourceTree = "<group>"; };
@@ -112,8 +105,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55630177207847ED002793E4 /* OAuthSwift.framework in Frameworks */,
-				55630176207847E3002793E4 /* KeychainAccess.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +126,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55CFE2451C855BDC001160C7 /* KeychainAccess.framework in Frameworks */,
-				55CFE2421C855B41001160C7 /* OAuthSwift.framework in Frameworks */,
+				55B49A3E264D1B5A00A1D309 /* KeychainAccess in Frameworks */,
+				55B49A36264D1B4300A1D309 /* OAuthSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,8 +135,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55CFE2481C855C10001160C7 /* KeychainAccess.framework in Frameworks */,
-				55CFE2491C855C10001160C7 /* OAuthSwift.framework in Frameworks */,
 				55CFE2301C85588D001160C7 /* Question.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,6 +185,7 @@
 		55CFE21B1C85588D001160C7 = {
 			isa = PBXGroup;
 			children = (
+				55B49A1E264D18FC00A1D309 /* Package.swift */,
 				55CFE2271C85588D001160C7 /* Question */,
 				55CFE2331C85588D001160C7 /* QuestionTests */,
 				55048C4E1C8E8FD4000A3A64 /* QuestionExample */,
@@ -246,10 +236,6 @@
 		55CFE24D1C856242001160C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				55CFE2461C855C10001160C7 /* KeychainAccess.framework */,
-				55CFE2471C855C10001160C7 /* OAuthSwift.framework */,
-				55CFE2441C855BDC001160C7 /* KeychainAccess.framework */,
-				55CFE2411C855B41001160C7 /* OAuthSwift.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -397,6 +383,10 @@
 			dependencies = (
 			);
 			name = Question;
+			packageProductDependencies = (
+				55B49A35264D1B4300A1D309 /* OAuthSwift */,
+				55B49A3D264D1B5A00A1D309 /* KeychainAccess */,
+			);
 			productName = Question;
 			productReference = 55CFE2251C85588D001160C7 /* Question.framework */;
 			productType = "com.apple.product-type.framework";
@@ -461,6 +451,10 @@
 				Base,
 			);
 			mainGroup = 55CFE21B1C85588D001160C7;
+			packageReferences = (
+				55B49A34264D1B4300A1D309 /* XCRemoteSwiftPackageReference "OAuthSwift" */,
+				55B49A3C264D1B5A00A1D309 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+			);
 			productRefGroup = 55CFE2261C85588D001160C7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -632,7 +626,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = QuestionExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -651,7 +648,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = QuestionExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -666,7 +666,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuestionExampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -680,7 +684,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuestionExampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -693,7 +701,11 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuestionExampleUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -706,7 +718,11 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuestionExampleUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -822,7 +838,11 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = Question/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.Question;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -850,7 +870,11 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = Question/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.Question;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -864,7 +888,11 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuestionTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -876,7 +904,11 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = QuestionTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.nyoho.QuestionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -941,6 +973,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		55B49A34264D1B4300A1D309 /* XCRemoteSwiftPackageReference "OAuthSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OAuthSwift/OAuthSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.2;
+			};
+		};
+		55B49A3C264D1B5A00A1D309 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		55B49A35264D1B4300A1D309 /* OAuthSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55B49A34264D1B4300A1D309 /* XCRemoteSwiftPackageReference "OAuthSwift" */;
+			productName = OAuthSwift;
+		};
+		55B49A3D264D1B5A00A1D309 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55B49A3C264D1B5A00A1D309 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 55CFE21C1C85588D001160C7 /* Project object */;
 }
