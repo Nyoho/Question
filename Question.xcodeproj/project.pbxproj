@@ -16,13 +16,17 @@
 		5581956C1CEB7315005AA34E /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5581956B1CEB7315005AA34E /* Config.swift */; };
 		55895DAD2079E64400E711AE /* QuestionAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */; };
 		55895DAE2079E64400E711AE /* QuestionAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */; };
+		55A6A44C264FD0370066EFB0 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A6A44B264FD0370066EFB0 /* Question.swift */; };
+		55A6A46E264FD09B0066EFB0 /* LinuxMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A6A462264FD08C0066EFB0 /* LinuxMain.swift */; };
+		55A6A479264FD0A10066EFB0 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A6A464264FD08C0066EFB0 /* XCTestManifests.swift */; };
+		55A6A484264FD0A40066EFB0 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A6A465264FD08C0066EFB0 /* QuestionTests.swift */; };
+		55A6A4A9264FDA6B0066EFB0 /* OAuthSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55A6A4A8264FDA6B0066EFB0 /* OAuthSwift */; };
+		55A6A4B0264FDA7F0066EFB0 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 55A6A4AF264FDA7F0066EFB0 /* KeychainAccess */; };
 		55B49A36264D1B4300A1D309 /* OAuthSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55B49A35264D1B4300A1D309 /* OAuthSwift */; };
 		55B49A3E264D1B5A00A1D309 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 55B49A3D264D1B5A00A1D309 /* KeychainAccess */; };
-		55CFE2291C85588D001160C7 /* Question.h in Headers */ = {isa = PBXBuildFile; fileRef = 55CFE2281C85588D001160C7 /* Question.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		55CFE2301C85588D001160C7 /* Question.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55CFE2251C85588D001160C7 /* Question.framework */; };
 		55CFE2351C85588D001160C7 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFE2341C85588D001160C7 /* QuestionTests.swift */; };
 		55CFE24B1C855DA2001160C7 /* QuestionBookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */; };
-		55CFE24C1C856104001160C7 /* QuestionBookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */; };
 		55E7089220834C6C00A614A8 /* Bookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089120834C6C00A614A8 /* Bookmark.swift */; };
 		55E7089420834C9300A614A8 /* QuestionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089320834C9300A614A8 /* QuestionResponse.swift */; };
 		55E7089620834D8F00A614A8 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E7089520834D8F00A614A8 /* Result.swift */; };
@@ -81,9 +85,12 @@
 		5581956B1CEB7315005AA34E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAuthViewController.swift; sourceTree = "<group>"; };
 		55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionAuthViewController.xib; sourceTree = "<group>"; };
+		55A6A44B264FD0370066EFB0 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		55A6A462264FD08C0066EFB0 /* LinuxMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
+		55A6A464264FD08C0066EFB0 /* XCTestManifests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		55A6A465264FD08C0066EFB0 /* QuestionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionTests.swift; sourceTree = "<group>"; };
 		55B49A1E264D18FC00A1D309 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		55CFE2251C85588D001160C7 /* Question.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Question.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		55CFE2281C85588D001160C7 /* Question.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		55CFE22A1C85588D001160C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55CFE22F1C85588D001160C7 /* QuestionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuestionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55CFE2341C85588D001160C7 /* QuestionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTests.swift; sourceTree = "<group>"; };
@@ -105,6 +112,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A6A4B0264FDA7F0066EFB0 /* KeychainAccess in Frameworks */,
+				55A6A4A9264FDA6B0066EFB0 /* OAuthSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,11 +191,54 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		55A6A449264FD0370066EFB0 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				55A6A44A264FD0370066EFB0 /* Question */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		55A6A44A264FD0370066EFB0 /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				55A6A44B264FD0370066EFB0 /* Question.swift */,
+				55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */,
+				55CFE22A1C85588D001160C7 /* Info.plist */,
+				55E7089F20836A1A00A614A8 /* Requests */,
+				55E7089020834C0400A614A8 /* Responses */,
+				55E7088F20834BD700A614A8 /* Models */,
+				5562095623ACA8970059CCF5 /* View */,
+				55E7089520834D8F00A614A8 /* Result.swift */,
+				55E7089D2083661600A614A8 /* QuestionError.swift */,
+			);
+			path = Question;
+			sourceTree = "<group>";
+		};
+		55A6A461264FD08C0066EFB0 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				55A6A462264FD08C0066EFB0 /* LinuxMain.swift */,
+				55A6A463264FD08C0066EFB0 /* QuestionTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		55A6A463264FD08C0066EFB0 /* QuestionTests */ = {
+			isa = PBXGroup;
+			children = (
+				55A6A464264FD08C0066EFB0 /* XCTestManifests.swift */,
+				55A6A465264FD08C0066EFB0 /* QuestionTests.swift */,
+			);
+			path = QuestionTests;
+			sourceTree = "<group>";
+		};
 		55CFE21B1C85588D001160C7 = {
 			isa = PBXGroup;
 			children = (
 				55B49A1E264D18FC00A1D309 /* Package.swift */,
-				55CFE2271C85588D001160C7 /* Question */,
+				55A6A449264FD0370066EFB0 /* Sources */,
+				55A6A461264FD08C0066EFB0 /* Tests */,
 				55CFE2331C85588D001160C7 /* QuestionTests */,
 				55048C4E1C8E8FD4000A3A64 /* QuestionExample */,
 				55048C601C8E8FD4000A3A64 /* QuestionExampleTests */,
@@ -206,22 +258,6 @@
 				55048C681C8E8FD4000A3A64 /* QuestionExampleUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		55CFE2271C85588D001160C7 /* Question */ = {
-			isa = PBXGroup;
-			children = (
-				55CFE24A1C855DA2001160C7 /* QuestionBookmarkManager.swift */,
-				55CFE2281C85588D001160C7 /* Question.h */,
-				55CFE22A1C85588D001160C7 /* Info.plist */,
-				55E7089F20836A1A00A614A8 /* Requests */,
-				55E7089020834C0400A614A8 /* Responses */,
-				55E7088F20834BD700A614A8 /* Models */,
-				5562095623ACA8970059CCF5 /* View */,
-				55E7089520834D8F00A614A8 /* Result.swift */,
-				55E7089D2083661600A614A8 /* QuestionError.swift */,
-			);
-			path = Question;
 			sourceTree = "<group>";
 		};
 		55CFE2331C85588D001160C7 /* QuestionTests */ = {
@@ -307,7 +343,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55CFE2291C85588D001160C7 /* Question.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +364,10 @@
 				55C48F342086068000F303D2 /* PBXTargetDependency */,
 			);
 			name = QuestionExample;
+			packageProductDependencies = (
+				55A6A4A8264FDA6B0066EFB0 /* OAuthSwift */,
+				55A6A4AF264FDA7F0066EFB0 /* KeychainAccess */,
+			);
 			productName = QuestionExample;
 			productReference = 55048C4D1C8E8FD4000A3A64 /* QuestionExample.app */;
 			productType = "com.apple.product-type.application";
@@ -565,6 +604,7 @@
 				55CFE24B1C855DA2001160C7 /* QuestionBookmarkManager.swift in Sources */,
 				55E7089220834C6C00A614A8 /* Bookmark.swift in Sources */,
 				55E7089A2083526C00A614A8 /* User.swift in Sources */,
+				55A6A44C264FD0370066EFB0 /* Question.swift in Sources */,
 				55E7089E2083661600A614A8 /* QuestionError.swift in Sources */,
 				55E708A320836AF600A614A8 /* BookmarkRequest.swift in Sources */,
 			);
@@ -575,7 +615,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CFE2351C85588D001160C7 /* QuestionTests.swift in Sources */,
-				55CFE24C1C856104001160C7 /* QuestionBookmarkManager.swift in Sources */,
+				55A6A484264FD0A40066EFB0 /* QuestionTests.swift in Sources */,
+				55A6A46E264FD09B0066EFB0 /* LinuxMain.swift in Sources */,
+				55A6A479264FD0A10066EFB0 /* XCTestManifests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -836,7 +878,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Question/Info.plist;
+				INFOPLIST_FILE = Sources/Question/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -868,7 +910,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Question/Info.plist;
+				INFOPLIST_FILE = Sources/Question/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -994,6 +1036,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		55A6A4A8264FDA6B0066EFB0 /* OAuthSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55B49A34264D1B4300A1D309 /* XCRemoteSwiftPackageReference "OAuthSwift" */;
+			productName = OAuthSwift;
+		};
+		55A6A4AF264FDA7F0066EFB0 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55B49A3C264D1B5A00A1D309 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
 		55B49A35264D1B4300A1D309 /* OAuthSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 55B49A34264D1B4300A1D309 /* XCRemoteSwiftPackageReference "OAuthSwift" */;

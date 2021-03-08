@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Carthage/Checkouts/KeychainAccess/Lib/KeychainAccess.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Carthage/Checkouts/OAuthSwift/OAuthSwift.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "container:Question.xcodeproj">
    </FileRef>
 </Workspace>
