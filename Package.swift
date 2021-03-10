@@ -20,7 +20,10 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "Question",
-            dependencies: []),
+            dependencies: [
+                .package(url: "https://github.com/OAuthSwift/OAuthSwift.git", .upToNextMajor(from: "2.0.0")),
+                .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", .upToNextMajor(from: "4.0.0"))
+            ]),
         .testTarget(
             name: "QuestionTests",
             dependencies: ["Question"]),
