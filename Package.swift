@@ -25,6 +25,6 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "QuestionTests",
-            dependencies: ["Question"]),
+            dependencies: ["Question", "OAuthSwift", "KeychainAccess"]),
     ]
 )
