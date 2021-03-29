@@ -184,9 +184,16 @@
 			isa = PBXGroup;
 			children = (
 				55895DAB2079E64400E711AE /* QuestionAuthViewController.swift */,
-				55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5598489126511F0000B07B5A /* Resouces */ = {
+			isa = PBXGroup;
+			children = (
+				55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */,
+			);
+			path = Resouces;
 			sourceTree = "<group>";
 		};
 		55A6A449264FD0370066EFB0 /* Sources */ = {
@@ -206,6 +213,7 @@
 				55E7089020834C0400A614A8 /* Responses */,
 				55E7088F20834BD700A614A8 /* Models */,
 				5562095623ACA8970059CCF5 /* View */,
+				5598489126511F0000B07B5A /* Resouces */,
 				55E7089520834D8F00A614A8 /* Result.swift */,
 				55E7089D2083661600A614A8 /* QuestionError.swift */,
 			);
