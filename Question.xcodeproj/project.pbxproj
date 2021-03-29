@@ -188,19 +188,19 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		5598489126511F0000B07B5A /* Resouces */ = {
+		5598489126511F0000B07B5A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				55895DAC2079E64400E711AE /* QuestionAuthViewController.xib */,
 			);
-			path = Resouces;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		55A6A449264FD0370066EFB0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				55A6A44A264FD0370066EFB0 /* Question */,
-				5598489126511F0000B07B5A /* Resouces */,
+				5598489126511F0000B07B5A /* Resources */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
