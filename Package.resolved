@@ -39,7 +39,7 @@
       },
       {
         "package": "KeychainAccess",
-        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess",
+        "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
         "state": {
           "branch": null,
           "revision": "84e546727d66f1adc5439debad16270d0fdd04e7",
@@ -48,20 +48,11 @@
       },
       {
         "package": "OAuthSwift",
-        "repositoryURL": "https://github.com/OAuthSwift/OAuthSwift",
+        "repositoryURL": "https://github.com/OAuthSwift/OAuthSwift.git",
         "state": {
           "branch": null,
           "revision": "fde77955e6983fbfaabd491709d52b8a82fda4d0",
           "version": "2.1.2"
-        }
-      },
-      {
-        "package": "Question",
-        "repositoryURL": "https://github.com/Nyoho/Question",
-        "state": {
-          "branch": "master",
-          "revision": "4efc6ec3dee81ecce40d683c6cf2f66c4f50fdd8",
-          "version": null
         }
       },
       {
