@@ -49,7 +49,6 @@
 		55048C681C8E8FD4000A3A64 /* QuestionExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuestionExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		55048C6C1C8E8FD4000A3A64 /* QuestionExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionExampleUITests.swift; sourceTree = "<group>"; };
 		55048C6E1C8E8FD4000A3A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		555D2C5D265160E2006485FD /* Question */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Question; sourceTree = "<group>"; };
 		5581956B1CEB7315005AA34E /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,7 +114,6 @@
 		55CFE21B1C85588D001160C7 = {
 			isa = PBXGroup;
 			children = (
-				555D2C5D265160E2006485FD /* Question */,
 				55048C4E1C8E8FD4000A3A64 /* QuestionExample */,
 				55048C601C8E8FD4000A3A64 /* QuestionExampleTests */,
 				55048C6B1C8E8FD4000A3A64 /* QuestionExampleUITests */,

@@ -56,6 +56,15 @@
         }
       },
       {
+        "package": "Question",
+        "repositoryURL": "https://github.com/Nyoho/Question",
+        "state": {
+          "branch": "master",
+          "revision": "8db740faadaeb2a6ee10d4089090be8dad646c81",
+          "version": null
+        }
+      },
+      {
         "package": "Swifter",
         "repositoryURL": "https://github.com/httpswift/swifter.git",
         "state": {
