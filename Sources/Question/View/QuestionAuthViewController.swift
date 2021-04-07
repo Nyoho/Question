@@ -13,6 +13,10 @@ import OAuthSwift
 public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerType, WKNavigationDelegate, WKUIDelegate {
     
     var webView: WKWebView!
+
+    public static func loadFromNib() -> QuestionAuthViewController {
+        QuestionAuthViewController(nibName: "QuestionAuthViewController", bundle: Bundle.module)
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +48,7 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
         if let url = sender.url {
             print("did finish: \(url)")
             let u = url.absoluteString
-            if u.hasPrefix("https://nyoho.jp/oauth/") {
+            if u.hasPrefix("https://www.hatena.com/oauth/") {
                 print("Arrived callback page")
                 OAuthSwift.handle(url: url)
                 self.dismiss(self)
@@ -59,4 +63,7 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
         WKWebsiteDataStore.default().removeData(ofTypes: dataTypes, modifiedSince: Date.distantPast, completionHandler: {})
     }
     
+    public func close(_ sender: Any?) {
+        dismiss(self)
+    }
 }

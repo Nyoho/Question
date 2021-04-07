@@ -9,6 +9,7 @@
 import Foundation
 import OAuthSwift
 import KeychainAccess
+import AppKit
 
 private let questionBookmarkManagerInstance: QuestionBookmarkManager = QuestionBookmarkManager()
 
@@ -66,7 +67,7 @@ public class QuestionBookmarkManager {
     
     public func authenticate(viewController: QuestionAuthViewController) {
         oauthswift.authorizeURLHandler = viewController
-        oauthswift.authorize(withCallbackURL: URL(string: "https://nyoho.jp/oauth/")!) { result in
+        oauthswift.authorize(withCallbackURL: URL(string: "https://oauthswift.herokuapp.com/callback/hatena")!) { result in
             switch result {
             case .success(let (credential, response, parameters)):
                 print("Authentification succeeded.")
@@ -85,16 +86,34 @@ public class QuestionBookmarkManager {
                 } catch {
                     print("Error: \(error)")
                 }
+                viewController.close(self)
             case .failure(let error):
                 print("Authentification failed.")
+                switch error {
+                case .requestError(let networkError, let request): // -11
+                    print(networkError)
+                    print(request)
+                    break // do something with your networkError
+                default:
+                    break // do something
+                }
                 print(error.localizedDescription)
             }
         }
     }
 
+    public func performAuthWithModalWindow(_ sender: Any) {
+        //この方法では OAuthSwift エラー(-11) になる。400: Bad Request, Response: oauth_problem=parameter_rejected&oauth_parameters_rejected=oauth_token
+        let vc = QuestionAuthViewController.loadFromNib()
+        if let senderVC = sender as? NSViewController {
+            senderVC.presentAsModalWindow(vc)
+            QuestionBookmarkManager.shared.authenticate(viewController: vc)
+        }
+    }
+
     public func signOut() { // rename to logout?
         keychain["credential"] = nil
-        let vc = QuestionAuthViewController(nibName: "QuestionAuthViewController", bundle: Bundle.main)
+        let vc = QuestionAuthViewController(nibName: "QuestionAuthViewController", bundle: Bundle.module)
         vc.clearCookiesAndSessions()
 
         oauthswift.client.credential.oauthToken = ""
