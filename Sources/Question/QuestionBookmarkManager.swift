@@ -16,10 +16,39 @@ private let questionBookmarkManagerInstance: QuestionBookmarkManager = QuestionB
 public class QuestionBookmarkManager {
     var consumerKey = ""
     var consumerSecret = ""
-    public var authorized = false
+    public var authorized: Bool {
+        get {
+            return credential != nil
+        }
+    }
     let keychain = Keychain()
-    var username = ""
-    var displayName = ""
+    var username: String? {
+        get {
+            return UserDefaults.standard.string(forKey: "urlName")
+        }
+    }
+    var displayName: String? {
+        get {
+            return UserDefaults.standard.string(forKey: "displayName")
+        }
+    }
+    var credential: OAuthSwiftCredential? {
+        get {
+            if let username = self.username, let data = keychain[data: username] {
+                do {
+                    let credential = try JSONDecoder().decode(OAuthSwiftCredential.self, from: data)
+                    oauthswift.client = OAuthSwiftClient(credential: credential)
+                    return credential
+
+                } catch {
+                    print("'Cannot retrieve your credential' Error: \(error)")
+                    return nil
+                }
+            } else {
+                return nil
+            }
+        }
+    }
     
     var oauthswift = OAuth1Swift(
         consumerKey:     "consumerKey",
@@ -46,23 +75,6 @@ public class QuestionBookmarkManager {
             authorizeUrl:    "https://www.hatena.ne.jp/oauth/authorize",
             accessTokenUrl:  "https://www.hatena.com/oauth/token"
         )
-        checkAuthed()
-    }
-    
-    func checkAuthed() {
-        if let username = UserDefaults.standard.string(forKey: "urlName") {
-            self.username = username
-            if let data = keychain[data: username] {
-                do {
-                    let credential = try JSONDecoder().decode(OAuthSwiftCredential.self, from: data)
-                    oauthswift.client = OAuthSwiftClient(credential: credential)
-                    self.displayName = UserDefaults.standard.string(forKey: "displayName") ?? ""
-                    authorized = true
-                } catch {
-                    print("'Cannot retrieve your credential' Error: \(error)")
-                }
-            }
-        }
     }
     
     public func authenticate(viewController: QuestionAuthViewController) {
@@ -72,17 +84,15 @@ public class QuestionBookmarkManager {
             case .success(let (credential, response, parameters)):
                 print("Authentification succeeded.")
                 guard let name = parameters["url_name"] as? String else { return }
-                self.username = name
                 UserDefaults.standard.set(name, forKey: "urlName")
                 
                 guard let displayName = parameters["display_name"] as? String else { return }
-                self.displayName = displayName
                 UserDefaults.standard.set(displayName, forKey: "displayName")
                 
                 do {
                     let d = try JSONEncoder().encode(credential)
-                    self.keychain[data: self.username] = d
-                    self.authorized = true
+                    let u = self.username!
+                    self.keychain[data: u] = d
                 } catch {
                     print("Error: \(error)")
                 }
@@ -118,7 +128,8 @@ public class QuestionBookmarkManager {
 
         oauthswift.client.credential.oauthToken = ""
         oauthswift.client.credential.oauthTokenSecret = ""
-        authorized = false
+        UserDefaults.standard.set(nil, forKey: "urlName")
+        UserDefaults.standard.set(nil, forKey: "displayName")
     }
     
     public func send<Request: QuestionRequest>(request: Request, completion: @escaping (Result<Request.Response, QuestionError>) -> Void) {
