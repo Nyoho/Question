@@ -48,10 +48,9 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
         if let url = sender.url {
             print("did finish: \(url)")
             let u = url.absoluteString
-            if u.hasPrefix("https://www.hatena.com/oauth/") {
+            if u.hasPrefix("https://nyoho.jp/hatena") {
                 print("Arrived callback page")
                 OAuthSwift.handle(url: url)
-                self.dismiss(self)
             }
         }
     }

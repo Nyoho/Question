@@ -79,7 +79,7 @@ public class QuestionBookmarkManager {
     
     public func authenticate(viewController: QuestionAuthViewController) {
         oauthswift.authorizeURLHandler = viewController
-        oauthswift.authorize(withCallbackURL: URL(string: "https://oauthswift.herokuapp.com/callback/hatena")!) { result in
+        oauthswift.authorize(withCallbackURL: URL(string: "https://nyoho.jp/hatena")!) { result in
             switch result {
             case .success(let (credential, response, parameters)):
                 print("Authentification succeeded.")
