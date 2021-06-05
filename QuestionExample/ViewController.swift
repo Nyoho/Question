@@ -36,6 +36,7 @@ class ViewController: NSViewController {
     }
     
     @IBAction func getBookmark(_ sender: Any) {
+        guard QuestionBookmarkManager.shared.authorized else { return }
         guard let url = URL(string: urlField.stringValue) else { return }
         QuestionBookmarkManager.shared.getMyBookmark(url: url, completion: { (result) in
             switch result {
@@ -49,6 +50,7 @@ class ViewController: NSViewController {
     }
     
     @IBAction func postBookmark(_ sender: Any) {
+        guard QuestionBookmarkManager.shared.authorized else { return }
         guard let url = URL(string: urlField.stringValue) else { return }
         let comment = commentField.stringValue
         QuestionBookmarkManager.shared.postMyBookmark(url: url, comment: comment, completion: { (result) in
