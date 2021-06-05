@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/OAuthSwift/OAuthSwift",
         "state": {
           "branch": null,
-          "revision": "fde77955e6983fbfaabd491709d52b8a82fda4d0",
-          "version": "2.1.2"
+          "revision": "d85964b96dbce94df961f28b996187c835089903",
+          "version": "2.2.0"
         }
       },
       {
@@ -60,7 +60,7 @@
         "repositoryURL": "https://github.com/Nyoho/Question",
         "state": {
           "branch": "master",
-          "revision": "4efc6ec3dee81ecce40d683c6cf2f66c4f50fdd8",
+          "revision": "437494f6444b274a6baee6249ed761ed1aacd8f7",
           "version": null
         }
       },
