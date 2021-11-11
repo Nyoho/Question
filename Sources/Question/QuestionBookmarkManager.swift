@@ -22,12 +22,12 @@ public class QuestionBookmarkManager {
         }
     }
     let keychain = Keychain()
-    var username: String? {
+    public var username: String? {
         get {
             return UserDefaults.standard.string(forKey: "urlName")
         }
     }
-    var displayName: String? {
+    public var displayName: String? {
         get {
             return UserDefaults.standard.string(forKey: "displayName")
         }
