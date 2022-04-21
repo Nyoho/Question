@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/tid-kijyun/Kanna.git",
         "state": {
           "branch": null,
-          "revision": "c657fb9f5827ef138068215c76ad0bb62bbc92da",
-          "version": "5.2.4"
+          "revision": "f9e4922223dd0d3dfbf02ca70812cf5531fc0593",
+          "version": "5.2.7"
         }
       },
       {
@@ -53,15 +53,6 @@
           "branch": null,
           "revision": "d85964b96dbce94df961f28b996187c835089903",
           "version": "2.2.0"
-        }
-      },
-      {
-        "package": "Question",
-        "repositoryURL": "https://github.com/Nyoho/Question",
-        "state": {
-          "branch": "master",
-          "revision": "437494f6444b274a6baee6249ed761ed1aacd8f7",
-          "version": null
         }
       },
       {

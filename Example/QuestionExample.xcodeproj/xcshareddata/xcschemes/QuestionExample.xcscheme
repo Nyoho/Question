@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "55CFE2241C85588D001160C7"
-               BuildableName = "Question.framework"
-               BlueprintName = "Question"
+               BlueprintIdentifier = "55048C4C1C8E8FD4000A3A64"
+               BuildableName = "QuestionExample.app"
+               BlueprintName = "QuestionExample"
                ReferencedContainer = "container:Question.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,9 +30,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "55CFE2241C85588D001160C7"
-            BuildableName = "Question.framework"
-            BlueprintName = "Question"
+            BlueprintIdentifier = "55048C4C1C8E8FD4000A3A64"
+            BuildableName = "QuestionExample.app"
+            BlueprintName = "QuestionExample"
             ReferencedContainer = "container:Question.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -41,9 +41,19 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "55CFE22E1C85588D001160C7"
-               BuildableName = "QuestionTests.xctest"
-               BlueprintName = "QuestionTests"
+               BlueprintIdentifier = "55048C5C1C8E8FD4000A3A64"
+               BuildableName = "QuestionExampleTests.xctest"
+               BlueprintName = "QuestionExampleTests"
+               ReferencedContainer = "container:Question.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "55048C671C8E8FD4000A3A64"
+               BuildableName = "QuestionExampleUITests.xctest"
+               BlueprintName = "QuestionExampleUITests"
                ReferencedContainer = "container:Question.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -59,12 +69,22 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "55048C4C1C8E8FD4000A3A64"
+            BuildableName = "QuestionExample.app"
+            BlueprintName = "QuestionExample"
+            ReferencedContainer = "container:QuestionExample.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "55CFE2241C85588D001160C7"
-            BuildableName = "Question.framework"
-            BlueprintName = "Question"
+            BlueprintIdentifier = "55048C4C1C8E8FD4000A3A64"
+            BuildableName = "QuestionExample.app"
+            BlueprintName = "QuestionExample"
             ReferencedContainer = "container:Question.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -75,15 +95,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "55CFE2241C85588D001160C7"
-            BuildableName = "Question.framework"
-            BlueprintName = "Question"
+            BlueprintIdentifier = "55048C4C1C8E8FD4000A3A64"
+            BuildableName = "QuestionExample.app"
+            BlueprintName = "QuestionExample"
             ReferencedContainer = "container:Question.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
