@@ -213,5 +213,15 @@ public class QuestionBookmarkManager {
 //    public func deleteBookmarkWithURL:(NSURL *)url
 //    success:(void (^)(void))success
 //    failure:(void (^)(NSError *error))failure;
+
+    public func composeBookmark(permalink: URL) {
+        let bundle = Bundle.module.url(forResource: "QuestionBookmarkWindow", withExtension: "xib")
+        
+    }
     
+    public func openBookmarkWindows(permalink: URL) {
+        let vc = QuestionBookmarkViewController(nibName: "QuestionBookmarkViewController", bundle: Bundle.module)
+        print(vc)
+        //.presentAsModalWindow(vc)
+    }
 }
