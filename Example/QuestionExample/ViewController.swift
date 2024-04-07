@@ -49,6 +49,18 @@ class ViewController: NSViewController {
         })
     }
     
+    @IBAction func openBookmarkComposer(_ sender: Any) {
+        guard QuestionBookmarkManager.shared.authorized else {
+            print("You need to authenticate first.")
+            return
+        }
+        guard let url = URL(string: urlField.stringValue) else { return }
+        
+        let composer = QuestionBookmarkViewController.loadFromNib()
+        composer.configure(permalink: url)
+        presentAsModalWindow(composer)
+    }
+    
     @IBAction func postBookmark(_ sender: Any) {
         guard QuestionBookmarkManager.shared.authorized else { return }
         guard let url = URL(string: urlField.stringValue) else { return }
@@ -70,4 +82,3 @@ class ViewController: NSViewController {
 
 
 }
-
