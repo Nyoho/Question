@@ -7,7 +7,7 @@
 
 import Cocoa
 
-public final class QuestionBookmarkViewController: NSViewController {
+public class QuestionBookmarkViewController: NSViewController {
     // MARK: - IBOutlets
     @IBOutlet private weak var titleLabel: NSTextField!
     @IBOutlet private weak var urlLabel: NSTextField!

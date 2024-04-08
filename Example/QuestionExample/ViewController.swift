@@ -55,10 +55,12 @@ class ViewController: NSViewController {
             return
         }
         guard let url = URL(string: urlField.stringValue) else { return }
-        
-        let composer = QuestionBookmarkViewController.loadFromNib()
-        composer.configure(permalink: url)
-        presentAsModalWindow(composer)
+        do {
+            let composer = try QuestionBookmarkManager.shared.makeBookmarkComposer(permalink: url, title: urlField.stringValue)
+            presentAsModalWindow(composer)
+        } catch {
+            print("Failed to build composer: \(error)")
+        }
     }
     
     @IBAction func postBookmark(_ sender: Any) {
