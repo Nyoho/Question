@@ -1,6 +1,6 @@
 import Foundation
 
-public struct BookmarkComposerPresenter {
+public struct QuestionBookmarkComposerPresenter {
     public enum Error: Swift.Error, Equatable {
         case unauthorized
     }

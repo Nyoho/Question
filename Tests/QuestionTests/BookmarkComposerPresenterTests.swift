@@ -3,10 +3,10 @@ import XCTest
 
 final class BookmarkComposerPresenterTests: XCTestCase {
     func testUnauthorizedThrows() {
-        let presenter = BookmarkComposerPresenter(isAuthorized: { false }, viewControllerFactory: { QuestionBookmarkViewController(nibName: nil, bundle: nil) })
+        let presenter = QuestionBookmarkComposerPresenter(isAuthorized: { false }, viewControllerFactory: { QuestionBookmarkViewController(nibName: nil, bundle: nil) })
         let url = URL(string: "https://example.com/test")!
         XCTAssertThrowsError(try presenter.makeViewController(permalink: url)) { error in
-            XCTAssertEqual(error as? BookmarkComposerPresenter.Error, .unauthorized)
+            XCTAssertEqual(error as? QuestionBookmarkComposerPresenter.Error, .unauthorized)
         }
     }
     
@@ -15,7 +15,7 @@ final class BookmarkComposerPresenterTests: XCTestCase {
         let expectedTitle = "Sample"
         let expectedCount = "42 users"
         let stub = StubBookmarkViewController(nibName: nil, bundle: nil)
-        let presenter = BookmarkComposerPresenter(isAuthorized: { true }, viewControllerFactory: { stub })
+        let presenter = QuestionBookmarkComposerPresenter(isAuthorized: { true }, viewControllerFactory: { stub })
         let controller = try presenter.makeViewController(permalink: expectedURL, title: expectedTitle, bookmarkCountText: expectedCount)
         XCTAssertTrue(controller === stub)
         XCTAssertEqual(stub.configuredURL, expectedURL)

@@ -233,7 +233,7 @@ public class QuestionBookmarkManager {
                                      title: String? = nil,
                                      bookmarkCountText: String? = nil,
                                      factory: (() -> QuestionBookmarkViewController)? = nil) throws -> QuestionBookmarkViewController {
-        let presenter = BookmarkComposerPresenter(isAuthorized: { self.authorized },
+        let presenter = QuestionBookmarkComposerPresenter(isAuthorized: { self.authorized },
                                                   viewControllerFactory: factory ?? { QuestionBookmarkViewController.loadFromNib() })
         return try presenter.makeViewController(permalink: permalink, title: title, bookmarkCountText: bookmarkCountText)
     }
