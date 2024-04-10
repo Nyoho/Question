@@ -26,7 +26,7 @@
                     <rect key="frame" x="18" y="236" width="443" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="Title" id="aoN-ix-NZ4">
-                        <font key="font" usesAppearanceFont="YES"/>
+                        <font key="font" textStyle="headline" name=".SFNS-Bold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
