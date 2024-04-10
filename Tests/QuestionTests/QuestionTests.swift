@@ -6,7 +6,7 @@ final class QuestionTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(Question().text, "Hello, World!")
+        XCTAssertNotNil(QuestionBookmarkManager.shared)
     }
 
     static var allTests = [
