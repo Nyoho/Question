@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24412" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24412"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,48 +19,61 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <rect key="frame" x="0.0" y="0.0" width="474" height="203"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZc-Zb-iv7">
-                    <rect key="frame" x="18" y="236" width="443" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="Title" id="aoN-ix-NZ4">
+                <textField horizontalHuggingPriority="200" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="bZc-Zb-iv7">
+                    <rect key="frame" x="18" y="167" width="438" height="16"/>
+                    <textFieldCell key="cell" title="Title" id="aoN-ix-NZ4">
                         <font key="font" textStyle="headline" name=".SFNS-Bold"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYF-1Y-CRT">
-                    <rect key="frame" x="20" y="113" width="440" height="67"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ZEx-KX-1TH">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="VRm-01-fZz">
+                    <rect key="frame" x="18" y="146" width="438" height="13"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="https://example.com/some/path/123" id="GL7-ZJ-1mV">
+                        <font key="font" textStyle="footnote" name=".SFNS-Regular"/>
+                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gmy-de-qzm">
-                    <rect key="frame" x="18" y="188" width="71" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gmy-de-qzm">
+                    <rect key="frame" x="18" y="122" width="71" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="1000 users" id="KcS-Jg-Z6u">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VRm-01-fZz">
-                    <rect key="frame" x="18" y="212" width="443" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="https://example.com/some/path/123" id="GL7-ZJ-1mV">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                <scrollView horizontalLineScroll="40" horizontalPageScroll="10" verticalLineScroll="40" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ueo-oh-blI">
+                    <rect key="frame" x="20" y="60" width="434" height="54"/>
+                    <clipView key="contentView" drawsBackground="NO" id="IqG-fM-kz6">
+                        <rect key="frame" x="1" y="1" width="432" height="52"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView verticalHuggingPriority="1" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" verticallyResizable="NO" allowsUndo="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYF-1Y-CRT">
+                                <rect key="frame" x="0.0" y="0.0" width="432" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <size key="minSize" width="432" height="52"/>
+                                <size key="maxSize" width="1000000" height="1000000"/>
+                                <color key="insertionPointColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pVN-HI-haQ">
-                    <rect key="frame" x="332" y="65" width="134" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="QG2-oa-IkI">
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </scroller>
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="nQp-WZ-ZUZ">
+                        <rect key="frame" x="417" y="1" width="16" height="52"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </scroller>
+                </scrollView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVN-HI-haQ">
+                    <rect key="frame" x="333" y="13" width="128" height="32"/>
                     <buttonCell key="cell" type="push" title="Save Bookmark" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8bP-Xh-Lb1">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -70,7 +83,26 @@
                     </connections>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="111" y="154"/>
+            <constraints>
+                <constraint firstItem="Ueo-oh-blI" firstAttribute="top" secondItem="Gmy-de-qzm" secondAttribute="bottom" constant="8" symbolic="YES" id="2ZV-65-Ti5"/>
+                <constraint firstItem="Ueo-oh-blI" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="2hQ-wy-dnY"/>
+                <constraint firstItem="bZc-Zb-iv7" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="6KI-oP-Y6m"/>
+                <constraint firstItem="Gmy-de-qzm" firstAttribute="top" secondItem="VRm-01-fZz" secondAttribute="bottom" constant="8" symbolic="YES" id="6To-Zk-ube"/>
+                <constraint firstAttribute="trailing" secondItem="bZc-Zb-iv7" secondAttribute="trailing" constant="20" symbolic="YES" id="6nD-ZT-Ihh"/>
+                <constraint firstItem="bZc-Zb-iv7" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="Ahr-zu-Ayw"/>
+                <constraint firstItem="Gmy-de-qzm" firstAttribute="top" secondItem="VRm-01-fZz" secondAttribute="bottom" constant="8" symbolic="YES" id="EWa-zC-TF0"/>
+                <constraint firstItem="VRm-01-fZz" firstAttribute="top" secondItem="bZc-Zb-iv7" secondAttribute="bottom" constant="8" symbolic="YES" id="HC7-gb-Aja"/>
+                <constraint firstItem="Ueo-oh-blI" firstAttribute="top" secondItem="Gmy-de-qzm" secondAttribute="bottom" constant="8" symbolic="YES" id="K1u-I2-4Vi"/>
+                <constraint firstAttribute="trailing" secondItem="pVN-HI-haQ" secondAttribute="trailing" constant="20" symbolic="YES" id="KrJ-4O-t4k"/>
+                <constraint firstAttribute="trailing" secondItem="VRm-01-fZz" secondAttribute="trailing" constant="20" symbolic="YES" id="Nm7-ty-6jB"/>
+                <constraint firstItem="VRm-01-fZz" firstAttribute="top" secondItem="bZc-Zb-iv7" secondAttribute="bottom" constant="8" symbolic="YES" id="SCC-eA-L4b"/>
+                <constraint firstAttribute="bottom" secondItem="pVN-HI-haQ" secondAttribute="bottom" constant="20" symbolic="YES" id="UP2-AF-MS7"/>
+                <constraint firstAttribute="trailing" secondItem="Ueo-oh-blI" secondAttribute="trailing" constant="20" symbolic="YES" id="XfV-Fj-UJq"/>
+                <constraint firstItem="Gmy-de-qzm" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="ZAW-JH-VEK"/>
+                <constraint firstItem="pVN-HI-haQ" firstAttribute="top" secondItem="Ueo-oh-blI" secondAttribute="bottom" constant="20" symbolic="YES" id="c7c-g8-YBk"/>
+                <constraint firstItem="VRm-01-fZz" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="yTV-oh-mpX"/>
+            </constraints>
+            <point key="canvasLocation" x="108" y="157.5"/>
         </customView>
     </objects>
 </document>

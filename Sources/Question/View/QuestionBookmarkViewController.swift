@@ -12,7 +12,7 @@ public class QuestionBookmarkViewController: NSViewController {
     @IBOutlet private weak var titleLabel: NSTextField!
     @IBOutlet private weak var urlLabel: NSTextField!
     @IBOutlet private weak var usersCountLabel: NSTextField!
-    @IBOutlet private weak var commentField: NSTextField!
+    @IBOutlet private weak var commentField: NSTextView!
     @IBOutlet private weak var saveButton: NSButton!
     
     // MARK: - Public
@@ -57,7 +57,7 @@ public class QuestionBookmarkViewController: NSViewController {
         guard let permalink else { return }
         saveButton.isEnabled = false
         
-        let comment = commentField.stringValue
+        let comment = commentField.string
         bookmarkManager.postMyBookmark(url: permalink, comment: comment) { [weak self] result in
             DispatchQueue.main.async {
                 self?.saveButton.isEnabled = true
@@ -89,7 +89,7 @@ public class QuestionBookmarkViewController: NSViewController {
                 guard let self else { return }
                 self.isLoadingBookmark = false
                 if case let .success(bookmark) = result {
-                    self.commentField?.stringValue = bookmark.commentRaw
+                    self.commentField?.string = bookmark.commentRaw
                     self.pendingTitle = self.pendingTitle
                     self.updateViewIfNeeded()
                 }
@@ -115,4 +115,5 @@ public class QuestionBookmarkViewController: NSViewController {
             }
         }
     }
+    
 }
