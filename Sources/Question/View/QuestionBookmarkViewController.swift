@@ -36,6 +36,10 @@ public class QuestionBookmarkViewController: NSViewController {
     
     // MARK: - Private state
     private let bookmarkManager: QuestionBookmarkManager = .shared
+    private lazy var commentTextAttributes: [NSAttributedString.Key: Any] = [
+        .foregroundColor: NSColor.textColor,
+        .font: NSFont.systemFont(ofSize: NSFont.systemFontSize)
+    ]
     private var permalink: URL?
     private var pendingTitle: String?
     private var pendingUsersCount: String?
@@ -46,6 +50,7 @@ public class QuestionBookmarkViewController: NSViewController {
     // MARK: - Lifecycle
     public override func viewDidLoad() {
         super.viewDidLoad()
+        setupCommentField()
         hasLoadedView = true
         updateViewIfNeeded()
         loadExistingBookmarkIfNeeded()
@@ -89,7 +94,7 @@ public class QuestionBookmarkViewController: NSViewController {
                 guard let self else { return }
                 self.isLoadingBookmark = false
                 if case let .success(bookmark) = result {
-                    self.commentField?.string = bookmark.commentRaw
+                    self.setCommentText(bookmark.commentRaw)
                     self.pendingTitle = self.pendingTitle
                     self.updateViewIfNeeded()
                 }
@@ -116,4 +121,27 @@ public class QuestionBookmarkViewController: NSViewController {
         }
     }
     
+    private func setupCommentField() {
+        commentField.isEditable = true
+        commentField.isSelectable = true
+        commentField.isRichText = false
+        commentField.font = .systemFont(ofSize: NSFont.systemFontSize)
+        commentField.textColor = NSColor.textColor
+        commentField.backgroundColor = .textBackgroundColor
+        commentField.textContainer?.widthTracksTextView = true
+        commentField.textContainer?.lineFragmentPadding = 4
+        commentField.enclosingScrollView?.hasVerticalScroller = true
+        commentField.typingAttributes = commentTextAttributes
+    }
+    
+    private func setCommentText(_ text: String) {
+        if let textStorage = commentField?.textStorage {
+            let range = NSRange(location: 0, length: textStorage.length)
+            let attributed = NSAttributedString(string: text, attributes: commentTextAttributes)
+            textStorage.replaceCharacters(in: range, with: attributed)
+        } else {
+            commentField?.string = text
+        }
+        commentField?.scrollToBeginningOfDocument(nil)
+    }
 }

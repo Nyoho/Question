@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24412" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24412"/>
         <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,7 +23,7 @@
             <rect key="frame" x="0.0" y="0.0" width="474" height="203"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="200" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="bZc-Zb-iv7">
+                <textField focusRingType="none" horizontalHuggingPriority="200" verticalHuggingPriority="249" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="bZc-Zb-iv7">
                     <rect key="frame" x="18" y="167" width="438" height="16"/>
                     <textFieldCell key="cell" title="Title" id="aoN-ix-NZ4">
                         <font key="font" textStyle="headline" name=".SFNS-Bold"/>
@@ -30,7 +31,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="VRm-01-fZz">
+                <textField focusRingType="none" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="VRm-01-fZz">
                     <rect key="frame" x="18" y="146" width="438" height="13"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="https://example.com/some/path/123" id="GL7-ZJ-1mV">
                         <font key="font" textStyle="footnote" name=".SFNS-Regular"/>
@@ -38,7 +39,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gmy-de-qzm">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gmy-de-qzm">
                     <rect key="frame" x="18" y="122" width="71" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="1000 users" id="KcS-Jg-Z6u">
                         <font key="font" metaFont="system"/>
