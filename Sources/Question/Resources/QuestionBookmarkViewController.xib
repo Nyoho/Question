@@ -43,7 +43,7 @@
                     <rect key="frame" x="18" y="122" width="71" height="16"/>
                     <textFieldCell key="cell" lineBreakMode="clipping" title="1000 users" id="KcS-Jg-Z6u">
                         <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>

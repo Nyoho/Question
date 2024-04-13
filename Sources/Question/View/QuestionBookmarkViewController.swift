@@ -26,7 +26,7 @@ public class QuestionBookmarkViewController: NSViewController {
             self.pendingTitle = title
         }
         if let bookmarkCountText {
-            self.pendingUsersCount = bookmarkCountText
+            self.pendingUsersCountText = bookmarkCountText
         }
         
         updateViewIfNeeded()
@@ -42,10 +42,16 @@ public class QuestionBookmarkViewController: NSViewController {
     ]
     private var permalink: URL?
     private var pendingTitle: String?
-    private var pendingUsersCount: String?
+    private var pendingUsersCountText: String?
+    private var usersCount: UInt?
     private var isLoadingBookmark = false
     private var hasLoadedView = false
     private var didRequestEntryMetadata = false
+    private lazy var numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
     
     // MARK: - Lifecycle
     public override func viewDidLoad() {
@@ -82,7 +88,13 @@ public class QuestionBookmarkViewController: NSViewController {
         guard hasLoadedView else { return }
         titleLabel?.stringValue = pendingTitle ?? ""
         urlLabel?.stringValue = permalink?.absoluteString ?? ""
-        usersCountLabel?.stringValue = pendingUsersCount ?? "-"
+        if let count = usersCount {
+            usersCountLabel?.stringValue = localizedUsersCount(count)
+        } else if let text = pendingUsersCountText {
+            usersCountLabel?.stringValue = text
+        } else {
+            usersCountLabel?.stringValue = localizedUsersCount(0)
+        }
     }
     
     private func loadExistingBookmarkIfNeeded() {
@@ -112,7 +124,7 @@ public class QuestionBookmarkViewController: NSViewController {
                 switch result {
                 case .success(let entry):
                     self.pendingTitle = entry.title
-                    self.pendingUsersCount = "\(entry.count) users"
+                    self.usersCount = entry.count
                     self.updateViewIfNeeded()
                 case .failure(let error):
                     NSLog("QuestionBookmarkViewController metadata failed: \(error)")
@@ -143,5 +155,22 @@ public class QuestionBookmarkViewController: NSViewController {
             commentField?.string = text
         }
         commentField?.scrollToBeginningOfDocument(nil)
+    }
+    
+    private func localizedUsersCount(_ count: UInt) -> String {
+        if count == 0 {
+            return localizedString("bookmark_users_zero", fallback: "No bookmarks yet")
+        }
+        let numberString = numberFormatter.string(from: NSNumber(value: count)) ?? "\(count)"
+        let format = localizedString("bookmark_users_count", fallback: "%@ users")
+        return String(format: format, numberString)
+    }
+    
+    private func localizedString(_ key: String, fallback: String) -> String {
+        let result = Bundle.module.localizedString(forKey: key, value: nil, table: nil)
+        if result == key {
+            return fallback
+        }
+        return result
     }
 }
