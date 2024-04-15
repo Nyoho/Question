@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Question",
+    defaultLocalization: "en",
     platforms: [
         .macOS(.v10_12)
     ],
