@@ -88,13 +88,9 @@ public class QuestionBookmarkViewController: NSViewController {
         guard hasLoadedView else { return }
         titleLabel?.stringValue = pendingTitle ?? ""
         urlLabel?.stringValue = permalink?.absoluteString ?? ""
-        if let count = usersCount {
-            usersCountLabel?.stringValue = localizedUsersCount(count)
-        } else if let text = pendingUsersCountText {
-            usersCountLabel?.stringValue = text
-        } else {
-            usersCountLabel?.stringValue = localizedUsersCount(0)
-        }
+        let (text, color) = usersCountDisplay()
+        usersCountLabel?.stringValue = text
+        usersCountLabel?.textColor = color
     }
     
     private func loadExistingBookmarkIfNeeded() {
@@ -155,6 +151,18 @@ public class QuestionBookmarkViewController: NSViewController {
             commentField?.string = text
         }
         commentField?.scrollToBeginningOfDocument(nil)
+    }
+    
+    private func usersCountDisplay() -> (String, NSColor) {
+        if let count = usersCount {
+            let text = localizedUsersCount(count)
+            let color: NSColor = count == 0 ? .secondaryLabelColor : NSColor.systemRed
+            return (text, color)
+        } else if let text = pendingUsersCountText {
+            return (text, .labelColor)
+        } else {
+            return (localizedUsersCount(0), .secondaryLabelColor)
+        }
     }
     
     private func localizedUsersCount(_ count: UInt) -> String {
