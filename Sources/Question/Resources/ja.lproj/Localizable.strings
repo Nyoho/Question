@@ -1,2 +1,4 @@
 "bookmark_users_count" = "%@ users";
 "bookmark_users_zero" = "まだブックマークされていません";
+"bookmark_window_title_add" = "ブックマークを追加";
+"bookmark_window_title_edit" = "ブックマークを編集";

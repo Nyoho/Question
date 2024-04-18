@@ -44,6 +44,7 @@ public class QuestionBookmarkViewController: NSViewController {
     private var pendingTitle: String?
     private var pendingUsersCountText: String?
     private var usersCount: UInt?
+    private var hasExistingBookmark = false
     private var isLoadingBookmark = false
     private var hasLoadedView = false
     private var didRequestEntryMetadata = false
@@ -91,6 +92,7 @@ public class QuestionBookmarkViewController: NSViewController {
         let (text, color) = usersCountDisplay()
         usersCountLabel?.stringValue = text
         usersCountLabel?.textColor = color
+        updateWindowTitle()
     }
     
     private func loadExistingBookmarkIfNeeded() {
@@ -104,6 +106,7 @@ public class QuestionBookmarkViewController: NSViewController {
                 if case let .success(bookmark) = result {
                     self.setCommentText(bookmark.commentRaw)
                     self.pendingTitle = self.pendingTitle
+                    self.hasExistingBookmark = true
                     self.updateViewIfNeeded()
                 }
             }
@@ -172,6 +175,17 @@ public class QuestionBookmarkViewController: NSViewController {
         let numberString = numberFormatter.string(from: NSNumber(value: count)) ?? "\(count)"
         let format = localizedString("bookmark_users_count", fallback: "%@ users")
         return String(format: format, numberString)
+    }
+    
+    private func updateWindowTitle() {
+        let key = hasExistingBookmark ? "bookmark_window_title_edit" : "bookmark_window_title_add"
+        let fallback = hasExistingBookmark ? "Edit Bookmark" : "Add Bookmark"
+        let title = localizedString(key, fallback: fallback)
+        if let window = view.window {
+            window.title = title
+        } else {
+            self.title = title
+        }
     }
     
     private func localizedString(_ key: String, fallback: String) -> String {

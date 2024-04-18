@@ -1,2 +1,4 @@
 "bookmark_users_count" = "%@ users";
 "bookmark_users_zero" = "No bookmarks yet";
+"bookmark_window_title_add" = "Add Bookmark";
+"bookmark_window_title_edit" = "Edit Bookmark";
