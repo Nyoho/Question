@@ -48,17 +48,17 @@
                     </textFieldCell>
                 </textField>
                 <scrollView horizontalLineScroll="40" horizontalPageScroll="10" verticalLineScroll="40" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ueo-oh-blI">
-                    <rect key="frame" x="20" y="60" width="434" height="54"/>
+                    <rect key="frame" x="20" y="48" width="434" height="66"/>
                     <clipView key="contentView" drawsBackground="NO" id="IqG-fM-kz6">
-                        <rect key="frame" x="1" y="1" width="432" height="52"/>
+                        <rect key="frame" x="1" y="1" width="432" height="64"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView verticalHuggingPriority="1" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" verticallyResizable="NO" allowsUndo="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYF-1Y-CRT">
-                                <rect key="frame" x="0.0" y="0.0" width="432" height="52"/>
+                                <rect key="frame" x="0.0" y="12" width="432" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="432" height="52"/>
+                                <size key="minSize" width="432" height="64"/>
                                 <size key="maxSize" width="1000000" height="1000000"/>
                                 <color key="insertionPointColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                             </textView>
@@ -69,7 +69,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </scroller>
                     <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="nQp-WZ-ZUZ">
-                        <rect key="frame" x="417" y="1" width="16" height="52"/>
+                        <rect key="frame" x="417" y="1" width="16" height="64"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </scroller>
                 </scrollView>
@@ -87,20 +87,19 @@
             <constraints>
                 <constraint firstItem="Ueo-oh-blI" firstAttribute="top" secondItem="Gmy-de-qzm" secondAttribute="bottom" constant="8" symbolic="YES" id="2ZV-65-Ti5"/>
                 <constraint firstItem="Ueo-oh-blI" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="2hQ-wy-dnY"/>
-                <constraint firstItem="bZc-Zb-iv7" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="6KI-oP-Y6m"/>
-                <constraint firstItem="Gmy-de-qzm" firstAttribute="top" secondItem="VRm-01-fZz" secondAttribute="bottom" constant="8" symbolic="YES" id="6To-Zk-ube"/>
-                <constraint firstAttribute="trailing" secondItem="bZc-Zb-iv7" secondAttribute="trailing" constant="20" symbolic="YES" id="6nD-ZT-Ihh"/>
-                <constraint firstItem="bZc-Zb-iv7" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" symbolic="YES" id="Ahr-zu-Ayw"/>
+                <constraint firstItem="bZc-Zb-iv7" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="6KI-oP-Y6m"/>
+                <constraint firstItem="Gmy-de-qzm" firstAttribute="top" secondItem="VRm-01-fZz" secondAttribute="bottom" constant="8" id="6To-Zk-ube"/>
+                <constraint firstAttribute="trailing" secondItem="bZc-Zb-iv7" secondAttribute="trailing" constant="20" id="6nD-ZT-Ihh"/>
+                <constraint firstItem="bZc-Zb-iv7" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="Ahr-zu-Ayw"/>
                 <constraint firstItem="Gmy-de-qzm" firstAttribute="top" secondItem="VRm-01-fZz" secondAttribute="bottom" constant="8" symbolic="YES" id="EWa-zC-TF0"/>
-                <constraint firstItem="VRm-01-fZz" firstAttribute="top" secondItem="bZc-Zb-iv7" secondAttribute="bottom" constant="8" symbolic="YES" id="HC7-gb-Aja"/>
+                <constraint firstItem="VRm-01-fZz" firstAttribute="top" secondItem="bZc-Zb-iv7" secondAttribute="bottom" constant="8" id="HC7-gb-Aja"/>
                 <constraint firstItem="Ueo-oh-blI" firstAttribute="top" secondItem="Gmy-de-qzm" secondAttribute="bottom" constant="8" symbolic="YES" id="K1u-I2-4Vi"/>
                 <constraint firstAttribute="trailing" secondItem="pVN-HI-haQ" secondAttribute="trailing" constant="20" symbolic="YES" id="KrJ-4O-t4k"/>
                 <constraint firstAttribute="trailing" secondItem="VRm-01-fZz" secondAttribute="trailing" constant="20" symbolic="YES" id="Nm7-ty-6jB"/>
-                <constraint firstItem="VRm-01-fZz" firstAttribute="top" secondItem="bZc-Zb-iv7" secondAttribute="bottom" constant="8" symbolic="YES" id="SCC-eA-L4b"/>
-                <constraint firstAttribute="bottom" secondItem="pVN-HI-haQ" secondAttribute="bottom" constant="20" symbolic="YES" id="UP2-AF-MS7"/>
+                <constraint firstAttribute="bottom" secondItem="pVN-HI-haQ" secondAttribute="bottom" constant="20" id="UP2-AF-MS7"/>
                 <constraint firstAttribute="trailing" secondItem="Ueo-oh-blI" secondAttribute="trailing" constant="20" symbolic="YES" id="XfV-Fj-UJq"/>
                 <constraint firstItem="Gmy-de-qzm" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="ZAW-JH-VEK"/>
-                <constraint firstItem="pVN-HI-haQ" firstAttribute="top" secondItem="Ueo-oh-blI" secondAttribute="bottom" constant="20" symbolic="YES" id="c7c-g8-YBk"/>
+                <constraint firstItem="pVN-HI-haQ" firstAttribute="top" secondItem="Ueo-oh-blI" secondAttribute="bottom" constant="8" id="c7c-g8-YBk"/>
                 <constraint firstItem="VRm-01-fZz" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="yTV-oh-mpX"/>
             </constraints>
             <point key="canvasLocation" x="108" y="157.5"/>
