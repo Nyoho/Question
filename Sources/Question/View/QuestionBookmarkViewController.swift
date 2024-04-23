@@ -21,13 +21,10 @@ public class QuestionBookmarkViewController: NSViewController {
     }
     
     public func configure(permalink: URL, title: String? = nil, bookmarkCountText: String? = nil) {
+        resetLoadingState()
         self.permalink = permalink
-        if let title {
-            self.pendingTitle = title
-        }
-        if let bookmarkCountText {
-            self.pendingUsersCountText = bookmarkCountText
-        }
+        self.pendingTitle = title
+        self.pendingUsersCountText = bookmarkCountText
         
         updateViewIfNeeded()
         loadExistingBookmarkIfNeeded()
@@ -48,6 +45,10 @@ public class QuestionBookmarkViewController: NSViewController {
     private var isLoadingBookmark = false
     private var hasLoadedView = false
     private var didRequestEntryMetadata = false
+    private var isEntryLoaded = false
+    private var isBookmarkLoaded = false
+    private var isShowingCommentPlaceholder = true
+    private var pendingCommentText: String?
     private lazy var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -87,11 +88,12 @@ public class QuestionBookmarkViewController: NSViewController {
     // MARK: - Helpers
     private func updateViewIfNeeded() {
         guard hasLoadedView else { return }
-        titleLabel?.stringValue = pendingTitle ?? ""
-        urlLabel?.stringValue = permalink?.absoluteString ?? ""
+        titleLabel?.stringValue = titleDisplayText()
+        urlLabel?.stringValue = urlDisplayText()
         let (text, color) = usersCountDisplay()
         usersCountLabel?.stringValue = text
         usersCountLabel?.textColor = color
+        updateCommentFieldAppearance()
         updateWindowTitle()
     }
     
@@ -103,12 +105,17 @@ public class QuestionBookmarkViewController: NSViewController {
             DispatchQueue.main.async {
                 guard let self else { return }
                 self.isLoadingBookmark = false
-                if case let .success(bookmark) = result {
+                switch result {
+                case let .success(bookmark):
                     self.setCommentText(bookmark.commentRaw)
                     self.pendingTitle = self.pendingTitle
                     self.hasExistingBookmark = true
-                    self.updateViewIfNeeded()
+                case .failure:
+                    self.setCommentText("")
+                    self.hasExistingBookmark = false
                 }
+                self.isBookmarkLoaded = true
+                self.updateViewIfNeeded()
             }
         }
     }
@@ -120,14 +127,16 @@ public class QuestionBookmarkViewController: NSViewController {
         bookmarkManager.getEntry(url: permalink) { [weak self] result in
             DispatchQueue.main.async {
                 guard let self else { return }
+                self.isEntryLoaded = true
                 switch result {
                 case .success(let entry):
                     self.pendingTitle = entry.title
                     self.usersCount = entry.count
-                    self.updateViewIfNeeded()
                 case .failure(let error):
                     NSLog("QuestionBookmarkViewController metadata failed: \(error)")
+                    self.usersCount = nil
                 }
+                self.updateViewIfNeeded()
             }
         }
     }
@@ -143,9 +152,18 @@ public class QuestionBookmarkViewController: NSViewController {
         commentField.textContainer?.lineFragmentPadding = 4
         commentField.enclosingScrollView?.hasVerticalScroller = true
         commentField.typingAttributes = commentTextAttributes
+        if isShowingCommentPlaceholder {
+            showCommentLoadingPlaceholder()
+        }
     }
     
     private func setCommentText(_ text: String) {
+        pendingCommentText = text
+        applyPendingCommentTextIfPossible()
+    }
+    
+    private func applyPendingCommentTextIfPossible() {
+        guard hasLoadedView, let text = pendingCommentText else { return }
         if let textStorage = commentField?.textStorage {
             let range = NSRange(location: 0, length: textStorage.length)
             let attributed = NSAttributedString(string: text, attributes: commentTextAttributes)
@@ -153,19 +171,56 @@ public class QuestionBookmarkViewController: NSViewController {
         } else {
             commentField?.string = text
         }
+        commentField?.textColor = NSColor.textColor
+        commentField?.isEditable = true
+        isShowingCommentPlaceholder = false
         commentField?.scrollToBeginningOfDocument(nil)
     }
     
+    private func titleDisplayText() -> String {
+        if let title = pendingTitle, !title.isEmpty {
+            return title
+        }
+        if isEntryLoaded, let urlString = permalink?.absoluteString {
+            return urlString
+        }
+        return localizedString("bookmark_loading_title", fallback: "Loading…")
+    }
+    
+    private func urlDisplayText() -> String {
+        if let urlString = permalink?.absoluteString {
+            return urlString
+        }
+        return localizedString("bookmark_loading_url", fallback: "Loading…")
+    }
+    
+    private func updateCommentFieldAppearance() {
+        if isBookmarkLoaded {
+            applyPendingCommentTextIfPossible()
+        } else {
+            commentField?.isEditable = false
+            if !isShowingCommentPlaceholder {
+                showCommentLoadingPlaceholder()
+            } else if commentField?.string.isEmpty ?? true {
+                showCommentLoadingPlaceholder()
+            }
+        }
+    }
+    
     private func usersCountDisplay() -> (String, NSColor) {
+        if !isEntryLoaded {
+            if let text = pendingUsersCountText {
+                return (text, .labelColor)
+            }
+            let loading = localizedString("bookmark_loading_users", fallback: "Loading…")
+            return (loading, .secondaryLabelColor)
+        }
         if let count = usersCount {
             let text = localizedUsersCount(count)
-            let color: NSColor = count == 0 ? .secondaryLabelColor : NSColor.systemRed
+            let color: NSColor = count == 0 ? .secondaryLabelColor : .systemRed
             return (text, color)
-        } else if let text = pendingUsersCountText {
-            return (text, .labelColor)
-        } else {
-            return (localizedUsersCount(0), .secondaryLabelColor)
         }
+        return (localizedUsersCount(0), .secondaryLabelColor)
     }
     
     private func localizedUsersCount(_ count: UInt) -> String {
@@ -178,8 +233,18 @@ public class QuestionBookmarkViewController: NSViewController {
     }
     
     private func updateWindowTitle() {
-        let key = hasExistingBookmark ? "bookmark_window_title_edit" : "bookmark_window_title_add"
-        let fallback = hasExistingBookmark ? "Edit Bookmark" : "Add Bookmark"
+        let key: String
+        let fallback: String
+        if !isEntryLoaded || !isBookmarkLoaded {
+            key = "bookmark_window_title_loading"
+            fallback = "Loading…"
+        } else if hasExistingBookmark {
+            key = "bookmark_window_title_edit"
+            fallback = "Edit Bookmark"
+        } else {
+            key = "bookmark_window_title_add"
+            fallback = "Add Bookmark"
+        }
         let title = localizedString(key, fallback: fallback)
         if let window = view.window {
             window.title = title
@@ -194,5 +259,26 @@ public class QuestionBookmarkViewController: NSViewController {
             return fallback
         }
         return result
+    }
+    
+    private func resetLoadingState() {
+        isEntryLoaded = false
+        isBookmarkLoaded = false
+        isLoadingBookmark = false
+        hasExistingBookmark = false
+        usersCount = nil
+        isShowingCommentPlaceholder = true
+        pendingCommentText = nil
+        if hasLoadedView {
+            showCommentLoadingPlaceholder()
+        }
+    }
+    
+    private func showCommentLoadingPlaceholder() {
+        let placeholder = localizedString("bookmark_loading_comment", fallback: "Loading…")
+        commentField?.string = placeholder
+        commentField?.isEditable = false
+        commentField?.textColor = NSColor.secondaryLabelColor
+        isShowingCommentPlaceholder = true
     }
 }
