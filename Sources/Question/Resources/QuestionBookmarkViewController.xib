@@ -53,9 +53,9 @@
                         <rect key="frame" x="1" y="1" width="432" height="64"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView verticalHuggingPriority="1" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" verticallyResizable="NO" allowsUndo="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYF-1Y-CRT">
+                            <textView verticalHuggingPriority="1" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" importsGraphics="NO" richText="NO" verticallyResizable="NO" allowsUndo="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYF-1Y-CRT">
                                 <rect key="frame" x="0.0" y="12" width="432" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <size key="minSize" width="432" height="64"/>

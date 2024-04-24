@@ -7,7 +7,7 @@
 
 import Cocoa
 
-public class QuestionBookmarkViewController: NSViewController {
+public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegate {
     // MARK: - IBOutlets
     @IBOutlet private weak var titleLabel: NSTextField!
     @IBOutlet private weak var urlLabel: NSTextField!
@@ -152,6 +152,7 @@ public class QuestionBookmarkViewController: NSViewController {
         commentField.textContainer?.lineFragmentPadding = 4
         commentField.enclosingScrollView?.hasVerticalScroller = true
         commentField.typingAttributes = commentTextAttributes
+        commentField.delegate = self
         if isShowingCommentPlaceholder {
             showCommentLoadingPlaceholder()
         }
@@ -280,5 +281,14 @@ public class QuestionBookmarkViewController: NSViewController {
         commentField?.isEditable = false
         commentField?.textColor = NSColor.secondaryLabelColor
         isShowingCommentPlaceholder = true
+    }
+
+    // MARK: - NSTextViewDelegate
+    public func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        if commandSelector == #selector(NSResponder.insertNewline(_:)) {
+            saveBookmark(self)
+            return true
+        }
+        return false
     }
 }
