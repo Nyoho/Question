@@ -2,8 +2,9 @@
 "bookmark_users_zero" = "まだブックマークされていません";
 "bookmark_window_title_add" = "ブックマークを追加";
 "bookmark_window_title_edit" = "ブックマークを編集";
+"bookmark_window_title_loading" = "読み込み中…";
 "bookmark_loading_title" = "読み込み中…";
 "bookmark_loading_url" = "読み込み中…";
 "bookmark_loading_comment" = "読み込み中…";
 "bookmark_loading_users" = "読み込み中…";
-"bookmark_window_title_loading" = "読み込み中…";
+"bookmark_delete_tooltip" = "ブックマークを削除";
