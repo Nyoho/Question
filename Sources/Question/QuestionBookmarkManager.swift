@@ -139,6 +139,14 @@ public class QuestionBookmarkManager {
             switch method {
             case .post:
                 return .POST
+            case .delete:
+                return .DELETE
+            case .put:
+                return .PUT
+            case .patch:
+                return .PATCH
+            case .head:
+                return .HEAD
             default:
                 return .GET
             }
@@ -155,21 +163,33 @@ public class QuestionBookmarkManager {
                     let data = response.data
                     let b = try request.response(from: data, urlResponse: response.response)
                     completion(Result.success(b))
+                } catch let parsingError as QuestionError {
+                    completion(.failure(parsingError))
+                } catch let decodingError as DecodingError {
+                    print("JSON conversion failed in JSONDecoder", decodingError.localizedDescription)
+                    completion(.failure(.responseParseError(decodingError)))
                 } catch {
-                    print("JSON conversion failed in JSONDecoder", error.localizedDescription)
+                    completion(.failure(.responseParseError(error)))
                 }
             case .failure(let error):
                 switch error { // error is OAuthSwiftError
                 case .requestError(let e, let request):
                     //requestError[Error Domain=NSURLErrorDomain Code=404 "" UserInfo={Response-Body={"url":"...","message":"Bookmark is not found"}, NSErrorFailingURLKey=http://api.b.hatena.ne.jp/1/my/bookmark?url=..., Response-Headers={...
                     print("A request error: request = \(request)")
-                    if let s =  (e as NSError).userInfo["Response-Body"] {
+                    let nsError = e as NSError
+                    if let s = nsError.userInfo["Response-Body"] {
                         print(s)
                     }
-                    completion(Result.failure(.connectionError(e)))
+                    if let response = nsError.userInfo[OAuthSwiftError.ResponseKey] as? HTTPURLResponse {
+                        let data = nsError.userInfo[OAuthSwiftError.ResponseDataKey] as? Data ?? Data()
+                        completion(.failure(.httpStatus(code: response.statusCode, data: data)))
+                    } else {
+                        completion(Result.failure(.connectionError(e)))
+                    }
                 default:
                     print("The others' error:")
                     print(error)
+                    completion(.failure(.connectionError(error)))
                 }
             }
         }
@@ -189,6 +209,23 @@ public class QuestionBookmarkManager {
     public func postMyBookmark(url: URL, comment: String, tags: [String] = [], postTwitter: Bool = false, postFacebook: Bool = false, postMixi: Bool = false, postEvernote: Bool = false, sendMail: Bool = false, isPrivate: Bool = false, completion: @escaping (Result<Bookmark, QuestionError>) -> Void) {
         let request = PostBookmarkRequest(url: url, comment: comment, tags: tags, postTwitter: postTwitter, postFacebook: postFacebook, postMixi: postMixi, postEvernote: postEvernote, sendMail: sendMail, isPrivate: isPrivate)
         send(request: request, completion: completion)
+    }
+    
+    /// https://developer.hatena.ne.jp/ja/documents/bookmark/apis/rest/bookmark#delete_my_bookmark
+    public func deleteMyBookmark(url: URL, completion: @escaping (Result<Void, QuestionError>) -> Void) {
+        let request = DeleteBookmarkRequest(url: url)
+        send(request: request) { result in
+            switch result {
+            case .success:
+                completion(.success(()))
+            case .failure(let error):
+                if case .httpStatus(let code, _) = error, code == 404 {
+                    completion(.success(()))
+                } else {
+                    completion(.failure(error))
+                }
+            }
+        }
     }
 
 //
@@ -215,10 +252,6 @@ public class QuestionBookmarkManager {
 //    tags:(NSArray *)tags
 //    options:(HatenaBookmarkPOSTOptions)options
 //    success:(void (^)(HTBBookmarkedDataEntry *entry))success
-//    failure:(void (^)(NSError *error))failure;
-//
-//    public func deleteBookmarkWithURL:(NSURL *)url
-//    success:(void (^)(void))success
 //    failure:(void (^)(NSError *error))failure;
 
     public func composeBookmark(permalink: URL) {

@@ -12,6 +12,7 @@ public enum QuestionError: Error {
     case connectionError(Error)
     case responseParseError(Error)
     case apiError(Error)
+    case httpStatus(code: Int, data: Data)
 }
 
 public struct QuestionAPIError: Error, Decodable {

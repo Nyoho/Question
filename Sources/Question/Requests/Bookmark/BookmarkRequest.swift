@@ -86,3 +86,26 @@ public struct PostBookmarkRequest: QuestionRequest {
     }
 }
 
+public struct DeleteBookmarkRequest: QuestionRequest {
+    public typealias Response = EmptyResponse
+    
+    public let url: URL
+    
+    public init(url: URL) {
+        self.url = url
+    }
+    
+    public var method: HTTPMethod { .delete }
+    public var path: String { "/my/bookmark" }
+    public var queryItems: [String: Any] { ["url": url.absoluteString] }
+    
+    public func response(from data: Data, urlResponse: URLResponse) throws -> Response {
+        if let statusCode = (urlResponse as? HTTPURLResponse)?.statusCode,
+           !(200..<300).contains(statusCode) {
+            throw QuestionError.httpStatus(code: statusCode, data: data)
+        }
+        return EmptyResponse()
+    }
+}
+
+public struct EmptyResponse: Decodable {}

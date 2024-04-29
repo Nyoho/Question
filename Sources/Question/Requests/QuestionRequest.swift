@@ -27,6 +27,7 @@ public protocol QuestionRequest {
     var path: String { get }
     var method: HTTPMethod { get }
     var queryItems: [String:Any] { get } // not [URLQueryItem]
+    func response(from data: Data, urlResponse: URLResponse) throws -> Response
 }
 
 public extension QuestionRequest {

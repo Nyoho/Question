@@ -14,6 +14,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
     @IBOutlet private weak var usersCountLabel: NSTextField!
     @IBOutlet private weak var commentField: NSTextView!
     @IBOutlet private weak var saveButton: NSButton!
+    @IBOutlet private weak var deleteButton: NSButton!
     
     // MARK: - Public
     public static func loadFromNib() -> QuestionBookmarkViewController {
@@ -59,6 +60,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupCommentField()
+        configureDeleteButtonAppearance()
         hasLoadedView = true
         updateViewIfNeeded()
         loadExistingBookmarkIfNeeded()
@@ -68,18 +70,52 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
     // MARK: - Actions
     @IBAction private func saveBookmark(_ sender: Any) {
         guard let permalink else { return }
-        saveButton.isEnabled = false
+        setActionButtonsEnabled(false)
         
         let comment = commentField.string
         bookmarkManager.postMyBookmark(url: permalink, comment: comment) { [weak self] result in
             DispatchQueue.main.async {
-                self?.saveButton.isEnabled = true
+                self?.setActionButtonsEnabled(true)
                 switch result {
                 case .success:
                     self?.view.window?.performClose(nil)
                 case .failure(let error):
                     NSSound.beep()
                     NSLog("QuestionBookmarkViewController save failed: \(error)")
+                }
+            }
+        }
+    }
+    
+    @IBAction private func deleteBookmark(_ sender: Any) {
+        guard hasExistingBookmark, isBookmarkLoaded, let permalink else { return }
+        setActionButtonsEnabled(false)
+        bookmarkManager.deleteMyBookmark(url: permalink) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.setActionButtonsEnabled(true)
+                    self?.view.window?.performClose(nil)
+                case .failure(let error):
+                    self?.setActionButtonsEnabled(true)
+                    switch error {
+                    case .responseParseError(let underlying):
+                        if let decodingError = underlying as? DecodingError,
+                           case .dataCorrupted = decodingError {
+                            // DELETE の 204 など、JSON なしで発生した場合は成功扱い
+                            self?.view.window?.performClose(nil)
+                            return
+                        }
+                    case .httpStatus(let code, _):
+                        if code == 404 {
+                            self?.view.window?.performClose(nil)
+                            return
+                        }
+                    default:
+                        break
+                    }
+                    NSSound.beep()
+                    NSLog("QuestionBookmarkViewController delete failed: \(error)")
                 }
             }
         }
@@ -94,6 +130,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
         usersCountLabel?.stringValue = text
         usersCountLabel?.textColor = color
         updateCommentFieldAppearance()
+        updateDeleteButtonVisibility()
         updateWindowTitle()
     }
     
@@ -290,5 +327,35 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
             return true
         }
         return false
+    }
+    
+    private func updateDeleteButtonVisibility() {
+        let shouldShow = isBookmarkLoaded && hasExistingBookmark
+        deleteButton?.isHidden = !shouldShow
+        if shouldShow {
+            deleteButton?.isEnabled = saveButton?.isEnabled ?? true
+        } else {
+            deleteButton?.isEnabled = false
+        }
+    }
+    
+    private func setActionButtonsEnabled(_ enabled: Bool) {
+        saveButton?.isEnabled = enabled
+        if deleteButton?.isHidden == false {
+            deleteButton?.isEnabled = enabled
+        }
+        commentField?.isEditable = enabled && isBookmarkLoaded && !isShowingCommentPlaceholder
+    }
+    
+    private func configureDeleteButtonAppearance() {
+        deleteButton?.imagePosition = .imageOnly
+        if let image = NSImage(named: NSImage.touchBarDeleteTemplateName) ?? NSImage(named: NSImage.stopProgressTemplateName) {
+            image.isTemplate = true
+            deleteButton?.image = image
+        } else {
+            deleteButton?.title = "Delete"
+        }
+        deleteButton?.toolTip = localizedString("bookmark_delete_tooltip", fallback: "Delete bookmark")
+        deleteButton?.isHidden = true
     }
 }

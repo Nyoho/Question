@@ -10,6 +10,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="QuestionBookmarkViewController" customModule="Question">
             <connections>
                 <outlet property="commentField" destination="eYF-1Y-CRT" id="VIP-vE-eKo"/>
+                <outlet property="deleteButton" destination="zWf-8c-B1w" id="8IH-YG-JEZ"/>
                 <outlet property="saveButton" destination="pVN-HI-haQ" id="HBQ-Ie-DAz"/>
                 <outlet property="titleLabel" destination="bZc-Zb-iv7" id="8Pc-iU-0RC"/>
                 <outlet property="urlLabel" destination="VRm-01-fZz" id="Ucy-LY-Fzf"/>
@@ -54,7 +55,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView verticalHuggingPriority="1" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" importsGraphics="NO" richText="NO" verticallyResizable="NO" allowsUndo="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eYF-1Y-CRT">
-                                <rect key="frame" x="0.0" y="12" width="432" height="52"/>
+                                <rect key="frame" x="0.0" y="12" width="432" height="64"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -83,6 +84,16 @@
                         <action selector="saveBookmark:" target="-2" id="4ma-Jz-lh3"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zWf-8c-B1w">
+                    <rect key="frame" x="307" y="13" width="30" height="32"/>
+                    <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="h7y-kv-9LC">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="deleteBookmark:" target="-2" id="bgX-fJ-okQ"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="Ueo-oh-blI" firstAttribute="top" secondItem="Gmy-de-qzm" secondAttribute="bottom" constant="8" symbolic="YES" id="2ZV-65-Ti5"/>
@@ -97,9 +108,12 @@
                 <constraint firstAttribute="trailing" secondItem="pVN-HI-haQ" secondAttribute="trailing" constant="20" symbolic="YES" id="KrJ-4O-t4k"/>
                 <constraint firstAttribute="trailing" secondItem="VRm-01-fZz" secondAttribute="trailing" constant="20" symbolic="YES" id="Nm7-ty-6jB"/>
                 <constraint firstAttribute="bottom" secondItem="pVN-HI-haQ" secondAttribute="bottom" constant="20" id="UP2-AF-MS7"/>
+                <constraint firstAttribute="bottom" secondItem="zWf-8c-B1w" secondAttribute="bottom" constant="20" id="UpA-DR-4vG"/>
                 <constraint firstAttribute="trailing" secondItem="Ueo-oh-blI" secondAttribute="trailing" constant="20" symbolic="YES" id="XfV-Fj-UJq"/>
                 <constraint firstItem="Gmy-de-qzm" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="ZAW-JH-VEK"/>
                 <constraint firstItem="pVN-HI-haQ" firstAttribute="top" secondItem="Ueo-oh-blI" secondAttribute="bottom" constant="8" id="c7c-g8-YBk"/>
+                <constraint firstItem="zWf-8c-B1w" firstAttribute="top" secondItem="Ueo-oh-blI" secondAttribute="bottom" constant="8" id="eF1-r4-E2O"/>
+                <constraint firstItem="pVN-HI-haQ" firstAttribute="leading" secondItem="zWf-8c-B1w" secondAttribute="trailing" constant="10" id="ovG-o2-CpQ"/>
                 <constraint firstItem="VRm-01-fZz" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="yTV-oh-mpX"/>
             </constraints>
             <point key="canvasLocation" x="108" y="157.5"/>
