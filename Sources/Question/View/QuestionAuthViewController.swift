@@ -11,8 +11,10 @@ import WebKit
 import OAuthSwift
 
 public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerType, WKNavigationDelegate, WKUIDelegate {
-    
+
     var webView: WKWebView!
+    var oauthURL: URL?
+    var onLoginCompleted: (() -> Void)?
 
     public static func loadFromNib() -> QuestionAuthViewController {
         QuestionAuthViewController(nibName: "QuestionAuthViewController", bundle: Bundle.module)
@@ -41,6 +43,7 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
     
     public func handle(_ url: URL) {
         print("url: \(url)")
+        oauthURL = url
         webView.load(URLRequest(url: url))
     }
 
@@ -51,8 +54,22 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
             if u.hasPrefix("https://nyoho.jp/hatena") {
                 print("Arrived callback page")
                 OAuthSwift.handle(url: url)
+            } else if url.host == "www.hatena.ne.jp" && !u.contains("/oauth/") {
+                // ログイン後にトップページに飛ばされるようになった? そのときはOAuthフローを再開することに
+                if let callback = onLoginCompleted {
+                    print("Redirected to hatena page after login, restarting OAuth flow")
+                    onLoginCompleted = nil
+                    callback()
+                }
             }
         }
+    }
+
+    public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url {
+            print("navigating to: \(url)")
+        }
+        decisionHandler(.allow)
     }
     
     public func clearCookiesAndSessions() {
@@ -64,5 +81,12 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
     
     public func close(_ sender: Any?) {
         dismiss(self)
+    }
+
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if navigationAction.targetFrame == nil {
+            webView.load(navigationAction.request)
+        }
+        return nil
     }
 }

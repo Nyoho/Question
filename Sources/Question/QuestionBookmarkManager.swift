@@ -78,7 +78,21 @@ public class QuestionBookmarkManager {
     }
     
     public func authenticate(viewController: QuestionAuthViewController) {
+        // Clear previous token
+        oauthswift = OAuth1Swift(
+            consumerKey:     consumerKey,
+            consumerSecret:  consumerSecret,
+            requestTokenUrl: "https://www.hatena.com/oauth/initiate?scope=read_public,write_public",
+            authorizeUrl:    "https://www.hatena.ne.jp/oauth/authorize",
+            accessTokenUrl:  "https://www.hatena.com/oauth/token"
+        )
         oauthswift.authorizeURLHandler = viewController
+
+        // ログイン完了後にOAuthフローを再開するため
+        viewController.onLoginCompleted = { [weak self] in
+            self?.authenticate(viewController: viewController)
+        }
+
         oauthswift.authorize(withCallbackURL: URL(string: "https://nyoho.jp/hatena")!) { result in
             switch result {
             case .success(let (credential, response, parameters)):
