@@ -42,7 +42,6 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
     }
     
     public func handle(_ url: URL) {
-        print("url: \(url)")
         oauthURL = url
         webView.load(URLRequest(url: url))
     }
@@ -57,7 +56,6 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
             } else if url.host == "www.hatena.ne.jp" && !u.contains("/oauth/") {
                 // ログイン後にトップページに飛ばされるようになった? そのときはOAuthフローを再開することに
                 if let callback = onLoginCompleted {
-                    print("Redirected to hatena page after login, restarting OAuth flow")
                     onLoginCompleted = nil
                     callback()
                 }
@@ -66,9 +64,6 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
     }
 
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url {
-            print("navigating to: \(url)")
-        }
         decisionHandler(.allow)
     }
     
