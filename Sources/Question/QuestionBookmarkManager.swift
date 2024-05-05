@@ -219,6 +219,18 @@ public class QuestionBookmarkManager {
         send(request: GetEntryRequest(url: url), completion: completion)
     }
 
+    // https://developer.hatena.ne.jp/ja/documents/bookmark/apis/rest/tags/
+    public func getMyTags(completion: @escaping (Result<[Tag], QuestionError>) -> Void) {
+        send(request: GetMyTagsRequest()) { result in
+            switch result {
+            case .success(let response):
+                completion(.success(response.tags))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
     // https://developer.hatena.ne.jp/ja/documents/bookmark/apis/rest/bookmark#post_my_bookmark
     public func postMyBookmark(url: URL, comment: String, tags: [String] = [], postTwitter: Bool = false, postFacebook: Bool = false, postMixi: Bool = false, postEvernote: Bool = false, sendMail: Bool = false, isPrivate: Bool = false, completion: @escaping (Result<Bookmark, QuestionError>) -> Void) {
         let request = PostBookmarkRequest(url: url, comment: comment, tags: tags, postTwitter: postTwitter, postFacebook: postFacebook, postMixi: postMixi, postEvernote: postEvernote, sendMail: sendMail, isPrivate: isPrivate)
