@@ -13,7 +13,14 @@ public struct Tag: Decodable, QuestionResponse {
     public let modifiedEpoch: UInt
     public let modifiedDatetime: Date
     public let tag: String
-    
+
+    public init(count: UInt, modifiedEpoch: UInt, modifiedDatetime: Date, tag: String) {
+        self.count = count
+        self.modifiedEpoch = modifiedEpoch
+        self.modifiedDatetime = modifiedDatetime
+        self.tag = tag
+    }
+
     private enum CodingKeys: String, CodingKey {
         case count
         case modifiedEpoch = "modified_epoch"
