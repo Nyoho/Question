@@ -10,11 +10,11 @@ import Foundation
 
 public struct Tag: Decodable, QuestionResponse {
     public let count: UInt
-    public let modifiedEpoch: UInt
-    public let modifiedDatetime: Date
+    public let modifiedEpoch: UInt?
+    public let modifiedDatetime: Date?
     public let tag: String
 
-    public init(count: UInt, modifiedEpoch: UInt, modifiedDatetime: Date, tag: String) {
+    public init(count: UInt, modifiedEpoch: UInt? = nil, modifiedDatetime: Date? = nil, tag: String) {
         self.count = count
         self.modifiedEpoch = modifiedEpoch
         self.modifiedDatetime = modifiedDatetime
