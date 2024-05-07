@@ -53,7 +53,7 @@ public class QuestionBookmarkManager {
     var oauthswift = OAuth1Swift(
         consumerKey:     "consumerKey",
         consumerSecret:  "consumerSecret",
-        requestTokenUrl: "https://www.hatena.com/oauth/initiate?scope=read_public,write_public",
+        requestTokenUrl: "https://www.hatena.com/oauth/initiate?scope=read_public,write_public,read_private,write_private",
         authorizeUrl:    "https://www.hatena.ne.jp/oauth/authorize",
         accessTokenUrl:  "https://www.hatena.com/oauth/token"
     )
@@ -71,7 +71,7 @@ public class QuestionBookmarkManager {
         oauthswift = OAuth1Swift(
             consumerKey:     consumerKey,
             consumerSecret:  consumerSecret,
-            requestTokenUrl: "https://www.hatena.com/oauth/initiate?scope=read_public,write_public",
+            requestTokenUrl: "https://www.hatena.com/oauth/initiate?scope=read_public,write_public,read_private,write_private",
             authorizeUrl:    "https://www.hatena.ne.jp/oauth/authorize",
             accessTokenUrl:  "https://www.hatena.com/oauth/token"
         )
@@ -82,7 +82,7 @@ public class QuestionBookmarkManager {
         oauthswift = OAuth1Swift(
             consumerKey:     consumerKey,
             consumerSecret:  consumerSecret,
-            requestTokenUrl: "https://www.hatena.com/oauth/initiate?scope=read_public,write_public",
+            requestTokenUrl: "https://www.hatena.com/oauth/initiate?scope=read_public,write_public,read_private,write_private",
             authorizeUrl:    "https://www.hatena.ne.jp/oauth/authorize",
             accessTokenUrl:  "https://www.hatena.com/oauth/token"
         )
