@@ -12,7 +12,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
     @IBOutlet private weak var titleLabel: NSTextField!
     @IBOutlet private weak var urlLabel: NSTextField!
     @IBOutlet private weak var usersCountLabel: NSTextField!
-    @IBOutlet private weak var commentField: NSTextView!
+    @IBOutlet private weak var commentField: TagCompletionTextView!
     @IBOutlet private weak var saveButton: NSButton!
     @IBOutlet private weak var deleteButton: NSButton!
     
@@ -34,6 +34,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
     
     // MARK: - Private state
     private let bookmarkManager: QuestionBookmarkManager = .shared
+    private let tagCompletionHelper = TagCompletionHelper()
     private lazy var commentTextAttributes: [NSAttributedString.Key: Any] = [
         .foregroundColor: NSColor.textColor,
         .font: NSFont.systemFont(ofSize: NSFont.systemFontSize)
@@ -65,6 +66,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
         updateViewIfNeeded()
         loadExistingBookmarkIfNeeded()
         loadEntryMetadataIfNeeded()
+        loadTagsForCompletion()
     }
     
     // MARK: - Actions
@@ -190,6 +192,8 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
         commentField.enclosingScrollView?.hasVerticalScroller = true
         commentField.typingAttributes = commentTextAttributes
         commentField.delegate = self
+        commentField.isAutomaticTextCompletionEnabled = true
+        commentField.tagCompletionHelper = tagCompletionHelper
         if isShowingCommentPlaceholder {
             showCommentLoadingPlaceholder()
         }
@@ -328,7 +332,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
         }
         return false
     }
-    
+
     private func updateDeleteButtonVisibility() {
         let shouldShow = isBookmarkLoaded && hasExistingBookmark
         deleteButton?.isHidden = !shouldShow
@@ -357,5 +361,18 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
         }
         deleteButton?.toolTip = localizedString("bookmark_delete_tooltip", fallback: "Delete bookmark")
         deleteButton?.isHidden = true
+    }
+
+    private func loadTagsForCompletion() {
+        bookmarkManager.getMyTags { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let tags):
+                    self?.commentField?.allTags = tags
+                case .failure:
+                    break
+                }
+            }
+        }
     }
 }
