@@ -7,12 +7,13 @@
 
 import Cocoa
 
-public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegate {
+public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegate, TagInputTextFieldDelegate {
     // MARK: - IBOutlets
     @IBOutlet private weak var titleLabel: NSTextField!
     @IBOutlet private weak var urlLabel: NSTextField!
     @IBOutlet private weak var usersCountLabel: NSTextField!
     @IBOutlet private weak var commentField: TagCompletionTextView!
+    @IBOutlet private weak var tagInputField: TagInputTextField!
     @IBOutlet private weak var saveButton: NSButton!
     @IBOutlet private weak var deleteButton: NSButton!
     
@@ -61,6 +62,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupCommentField()
+        setupTagInputField()
         configureDeleteButtonAppearance()
         hasLoadedView = true
         updateViewIfNeeded()
@@ -198,6 +200,12 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
             showCommentLoadingPlaceholder()
         }
     }
+
+    private func setupTagInputField() {
+        tagInputField?.tagCompletionHelper = tagCompletionHelper
+        tagInputField?.tagInputDelegate = self
+        tagInputField?.isAutomaticTextCompletionEnabled = true
+    }
     
     private func setCommentText(_ text: String) {
         pendingCommentText = text
@@ -333,6 +341,55 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
         return false
     }
 
+    // MARK: - TagInputTextFieldDelegate
+    public func tagInputTextField(_ textField: TagInputTextField, didSubmitTag tag: String) {
+        insertTagIntoComment(tag)
+    }
+
+    private func insertTagIntoComment(_ tag: String) {
+        let tagString = "[\(tag)]"
+        let comment = commentField.string
+
+        // 既存のタグの終わり位置を探す
+        let insertPosition = findTagInsertPosition(in: comment)
+
+        if let textStorage = commentField.textStorage {
+            let insertString: String
+            if insertPosition == 0 {
+                insertString = tagString
+            } else if insertPosition < comment.count {
+                // タグの後にスペースがなければ追加しない
+                insertString = tagString
+            } else {
+                insertString = tagString
+            }
+
+            let attributed = NSAttributedString(string: insertString, attributes: commentTextAttributes)
+            textStorage.insert(attributed, at: insertPosition)
+        }
+    }
+
+    private func findTagInsertPosition(in comment: String) -> Int {
+        // コメントの先頭からタグ `[...]` を探して、最後のタグの終わり位置を返す
+        var position = 0
+        var index = comment.startIndex
+
+        while index < comment.endIndex {
+            if comment[index] == "[" {
+                // `]`を探す
+                if let closeBracket = comment[index...].firstIndex(of: "]") {
+                    let nextIndex = comment.index(after: closeBracket)
+                    position = comment.distance(from: comment.startIndex, to: nextIndex)
+                    index = nextIndex
+                    continue
+                }
+            }
+            break
+        }
+
+        return position
+    }
+
     private func updateDeleteButtonVisibility() {
         let shouldShow = isBookmarkLoaded && hasExistingBookmark
         deleteButton?.isHidden = !shouldShow
@@ -369,6 +426,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
                 switch result {
                 case .success(let tags):
                     self?.commentField?.allTags = tags
+                    self?.tagInputField?.allTags = tags
                 case .failure:
                     break
                 }

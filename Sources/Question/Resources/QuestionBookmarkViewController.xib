@@ -12,6 +12,7 @@
                 <outlet property="commentField" destination="eYF-1Y-CRT" id="VIP-vE-eKo"/>
                 <outlet property="deleteButton" destination="zWf-8c-B1w" id="8IH-YG-JEZ"/>
                 <outlet property="saveButton" destination="pVN-HI-haQ" id="HBQ-Ie-DAz"/>
+                <outlet property="tagInputField" destination="TqR-3y-khy" id="pRX-pM-QzR"/>
                 <outlet property="titleLabel" destination="bZc-Zb-iv7" id="8Pc-iU-0RC"/>
                 <outlet property="urlLabel" destination="VRm-01-fZz" id="Ucy-LY-Fzf"/>
                 <outlet property="usersCountLabel" destination="Gmy-de-qzm" id="U4a-Xp-afj"/>
@@ -94,6 +95,23 @@
                         <action selector="deleteBookmark:" target="-2" id="bgX-fJ-okQ"/>
                     </connections>
                 </button>
+                <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TqR-3y-khy" customClass="TagInputTextField" customModule="Question">
+                    <rect key="frame" x="20" y="19" width="145" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="ba5-aj-aeA">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kf8-Wa-x5s">
+                    <rect key="frame" x="173" y="22" width="16" height="15"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" catalog="system" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7nf-Ij-9fc">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="Ueo-oh-blI" firstAttribute="top" secondItem="Gmy-de-qzm" secondAttribute="bottom" constant="8" symbolic="YES" id="2ZV-65-Ti5"/>
@@ -119,4 +137,7 @@
             <point key="canvasLocation" x="108" y="157.5"/>
         </customView>
     </objects>
+    <resources>
+        <image name="NSAddTemplate" catalog="system" width="18" height="17"/>
+    </resources>
 </document>
