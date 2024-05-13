@@ -9,6 +9,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="QuestionBookmarkViewController" customModule="Question">
             <connections>
+                <outlet property="addTagButton" destination="kf8-Wa-x5s" id="wC0-BE-z7w"/>
                 <outlet property="commentField" destination="eYF-1Y-CRT" id="VIP-vE-eKo"/>
                 <outlet property="deleteButton" destination="zWf-8c-B1w" id="8IH-YG-JEZ"/>
                 <outlet property="saveButton" destination="pVN-HI-haQ" id="HBQ-Ie-DAz"/>
@@ -111,6 +112,9 @@
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="addTagFromInputField:" target="-2" id="G01-cs-kln"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>

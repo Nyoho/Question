@@ -14,6 +14,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
     @IBOutlet private weak var usersCountLabel: NSTextField!
     @IBOutlet private weak var commentField: TagCompletionTextView!
     @IBOutlet private weak var tagInputField: TagInputTextField!
+    @IBOutlet private weak var addTagButton: NSButton!
     @IBOutlet private weak var saveButton: NSButton!
     @IBOutlet private weak var deleteButton: NSButton!
     
@@ -205,6 +206,7 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
         tagInputField?.tagCompletionHelper = tagCompletionHelper
         tagInputField?.tagInputDelegate = self
         tagInputField?.isAutomaticTextCompletionEnabled = true
+        updateAddTagButtonVisibility()
     }
     
     private func setCommentText(_ text: String) {
@@ -341,9 +343,28 @@ public class QuestionBookmarkViewController: NSViewController, NSTextViewDelegat
         return false
     }
 
+    @IBAction private func addTagFromInputField(_ sender: Any) {
+        guard let tagInputField = tagInputField else { return }
+        let tag = tagInputField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !tag.isEmpty {
+            insertTagIntoComment(tag)
+            tagInputField.stringValue = ""
+        }
+    }
+
     // MARK: - TagInputTextFieldDelegate
     public func tagInputTextField(_ textField: TagInputTextField, didSubmitTag tag: String) {
         insertTagIntoComment(tag)
+        updateAddTagButtonVisibility()
+    }
+
+    public func tagInputTextFieldDidChangeText(_ textField: TagInputTextField) {
+        updateAddTagButtonVisibility()
+    }
+
+    private func updateAddTagButtonVisibility() {
+        let hasText = !(tagInputField?.stringValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
+        addTagButton?.isHidden = !hasText
     }
 
     private func insertTagIntoComment(_ tag: String) {

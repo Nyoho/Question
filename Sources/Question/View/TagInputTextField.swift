@@ -7,6 +7,7 @@ import Cocoa
 
 public protocol TagInputTextFieldDelegate: AnyObject {
     func tagInputTextField(_ textField: TagInputTextField, didSubmitTag tag: String)
+    func tagInputTextFieldDidChangeText(_ textField: TagInputTextField)
 }
 
 public class TagInputTextField: NSTextField {
@@ -60,6 +61,8 @@ extension TagInputTextField: NSTextFieldDelegate {
 
     public func controlTextDidChange(_ obj: Notification) {
         let currentText = self.stringValue
+
+        tagInputDelegate?.tagInputTextFieldDidChangeText(self)
 
         // 同じテキストで既にトリガー済みならスキップ
         if currentText == lastTriggeredText {
