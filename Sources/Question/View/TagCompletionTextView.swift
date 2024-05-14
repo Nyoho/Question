@@ -10,8 +10,7 @@ public class TagCompletionTextView: NSTextView {
     public var tagCompletionHelper: TagCompletionHelper?
     public var allTags: [Tag] = []
 
-    private var isShowingCompletion = false
-    private var previousTextLength = 0
+    private var isInserting = false
 
     // `[`を含むように補完範囲を拡張
     public override var rangeForUserCompletion: NSRange {
@@ -45,33 +44,35 @@ public class TagCompletionTextView: NSTextView {
             return nil
         }
 
+        // プレフィックスが空（`[`のみ）の場合は選択なしにする
+        if prefixResult.prefix.isEmpty {
+            index.pointee = -1
+        }
+
         // `[tag]`の形式で返す
         return filteredTags.map { "[\($0.tag)]" }
+    }
+
+    public override func insertText(_ string: Any, replacementRange: NSRange) {
+        isInserting = true
+        super.insertText(string, replacementRange: replacementRange)
+        isInserting = false
     }
 
     public override func didChangeText() {
         super.didChangeText()
 
+        // 挿入操作でない場合はスキップ
+        guard isInserting else { return }
+
         let text = self.string
-        let currentLength = text.count
         let cursorPosition = self.selectedRange().location
-
-        // 削除操作の場合は自動補完をスキップ
-        let isDeleting = currentLength < previousTextLength
-        previousTextLength = currentLength
-
-        if isDeleting {
-            return
-        }
 
         // タグ入力中なら補完を表示
         if tagCompletionHelper?.extractTagPrefix(from: text, cursorPosition: cursorPosition) != nil {
-            if !allTags.isEmpty && !isShowingCompletion {
-                isShowingCompletion = true
-                // 次のランループで実行して、テキスト変更の処理完了後に補完を表示
+            if !allTags.isEmpty {
                 DispatchQueue.main.async { [weak self] in
                     self?.complete(nil)
-                    self?.isShowingCompletion = false
                 }
             }
         }
