@@ -8,3 +8,4 @@
 "bookmark_loading_comment" = "読み込み中…";
 "bookmark_loading_users" = "読み込み中…";
 "bookmark_delete_tooltip" = "ブックマークを削除";
+"tag_input_placeholder" = "タグを入力して追加";

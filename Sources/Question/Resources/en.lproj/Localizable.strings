@@ -8,3 +8,4 @@
 "bookmark_loading_comment" = "Loading…";
 "bookmark_loading_users" = "Loading…";
 "bookmark_delete_tooltip" = "Delete bookmark";
+"tag_input_placeholder" = "Enter tag to add";

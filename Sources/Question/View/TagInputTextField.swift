@@ -30,7 +30,11 @@ public class TagInputTextField: NSTextField {
 
     private func setup() {
         self.delegate = self
-        self.placeholderString = "Tag"
+        self.placeholderString = Bundle.module.localizedString(
+            forKey: "tag_input_placeholder",
+            value: "Enter tag to add",
+            table: nil
+        )
     }
 }
 
