@@ -254,43 +254,17 @@ public class QuestionBookmarkManager {
         }
     }
 
-//
-//    public func getMyEntryWithSuccess:(void (^)(HTBMyEntry *myEntry))success
-//    failure:(void (^)(NSError *error))failure;
-//
-//    public func getMyTagsWithSuccess:(void (^)(HTBMyTagsEntry *))success
-//    failure:(void (^)(NSError *error))failure;
-//
-//    public func getBookmarkEntryWithURL:(NSURL *)url
-//    success:(void (^)(HTBBookmarkEntry *entry))success
-//    failure:(void (^)(NSError *error))failure;
-//
-//    public func getCanonicalEntryWithURL:(NSURL *)url
-//    success:(void (^)(HTBCanonicalEntry *canonicalEntry))success
-//    failure:(void (^)(NSError *error))failure;
-//
-//    public func getBookmarkedDataEntryWithURL:(NSURL *)url
-//    success:(void (^)(HTBBookmarkedDataEntry *entry))success
-//    failure:(void (^)(NSError *error))failure;
-//    // Add or edit your bookmark.
-//    public func postBookmarkWithURL:(NSURL *)url
-//    comment:(NSString *)comment
-//    tags:(NSArray *)tags
-//    options:(HatenaBookmarkPOSTOptions)options
-//    success:(void (^)(HTBBookmarkedDataEntry *entry))success
-//    failure:(void (^)(NSError *error))failure;
-
     public func composeBookmark(permalink: URL) {
         let bundle = Bundle.module.url(forResource: "QuestionBookmarkWindow", withExtension: "xib")
-        
+
     }
-    
+
     public func openBookmarkWindows(permalink: URL) {
         let vc = QuestionBookmarkViewController(nibName: "QuestionBookmarkViewController", bundle: Bundle.module)
         print(vc)
         //.presentAsModalWindow(vc)
     }
-    
+
     public func makeBookmarkComposer(permalink: URL,
                                      title: String? = nil,
                                      bookmarkCountText: String? = nil,
