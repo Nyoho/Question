@@ -95,7 +95,7 @@ public class QuestionBookmarkManager {
 
         oauthswift.authorize(withCallbackURL: URL(string: "https://nyoho.jp/hatena")!) { result in
             switch result {
-            case .success(let (credential, response, parameters)):
+            case .success(let (credential, _, parameters)):
                 print("Authentification succeeded.")
                 guard let name = parameters["url_name"] as? String else { return }
                 UserDefaults.standard.set(name, forKey: "urlName")
@@ -252,17 +252,6 @@ public class QuestionBookmarkManager {
                 }
             }
         }
-    }
-
-    public func composeBookmark(permalink: URL) {
-        let bundle = Bundle.module.url(forResource: "QuestionBookmarkWindow", withExtension: "xib")
-
-    }
-
-    public func openBookmarkWindows(permalink: URL) {
-        let vc = QuestionBookmarkViewController(nibName: "QuestionBookmarkViewController", bundle: Bundle.module)
-        print(vc)
-        //.presentAsModalWindow(vc)
     }
 
     public func makeBookmarkComposer(permalink: URL,
