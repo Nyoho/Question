@@ -49,7 +49,7 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
     public func webView(_ sender: WKWebView, didFinish navigation: WKNavigation!) {
         if let url = sender.url {
             let u = url.absoluteString
-            if u.hasPrefix("https://nyoho.jp/hatena") {
+            if u.hasPrefix(QuestionBookmarkManager.callbackURL.absoluteString) {
                 OAuthSwift.handle(url: url)
             } else if url.host == "www.hatena.ne.jp" && !u.contains("/oauth/") {
                 // ログイン後にトップページに飛ばされるようになった? そのときはOAuthフローを再開することに

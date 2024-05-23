@@ -50,6 +50,9 @@ public class QuestionBookmarkManager {
         }
     }
     
+    // callback URL に、はてなAPIがカスタムURLスキームを受け付けないため、HTTPSサイトを使用
+    static let callbackURL = URL(string: "https://nyoho.jp/hatena")!
+
     var oauthswift = OAuth1Swift(
         consumerKey:     "consumerKey",
         consumerSecret:  "consumerSecret",
@@ -93,7 +96,7 @@ public class QuestionBookmarkManager {
             self?.authenticate(viewController: viewController)
         }
 
-        oauthswift.authorize(withCallbackURL: URL(string: "https://nyoho.jp/hatena")!) { result in
+        oauthswift.authorize(withCallbackURL: Self.callbackURL) { result in
             switch result {
             case .success(let (credential, _, parameters)):
                 guard let name = parameters["url_name"] as? String else { return }
