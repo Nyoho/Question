@@ -41,7 +41,7 @@ public class QuestionBookmarkManager {
                     return credential
 
                 } catch {
-                    print("'Cannot retrieve your credential' Error: \(error)")
+                    NSLog("Cannot retrieve your credential: %@", error.localizedDescription)
                     return nil
                 }
             } else {
@@ -96,32 +96,28 @@ public class QuestionBookmarkManager {
         oauthswift.authorize(withCallbackURL: URL(string: "https://nyoho.jp/hatena")!) { result in
             switch result {
             case .success(let (credential, _, parameters)):
-                print("Authentification succeeded.")
                 guard let name = parameters["url_name"] as? String else { return }
                 UserDefaults.standard.set(name, forKey: "urlName")
-                
+
                 guard let displayName = parameters["display_name"] as? String else { return }
                 UserDefaults.standard.set(displayName, forKey: "displayName")
-                
+
                 do {
                     let d = try JSONEncoder().encode(credential)
                     let u = self.username!
                     self.keychain[data: u] = d
                 } catch {
-                    print("Error: \(error)")
+                    NSLog("Credential encoding error: %@", error.localizedDescription)
                 }
                 viewController.close(self)
             case .failure(let error):
-                print("Authentification failed.")
+                NSLog("Authentication failed: %@", error.localizedDescription)
                 switch error {
-                case .requestError(let networkError, let request): // -11
-                    print(networkError)
-                    print(request)
-                    break // do something with your networkError
+                case .requestError(let networkError, let request):
+                    NSLog("Network error: %@, request: %@", networkError.localizedDescription, request.debugDescription)
                 default:
-                    break // do something
+                    break
                 }
-                print(error.localizedDescription)
             }
         }
     }
@@ -180,7 +176,7 @@ public class QuestionBookmarkManager {
                 } catch let parsingError as QuestionError {
                     completion(.failure(parsingError))
                 } catch let decodingError as DecodingError {
-                    print("JSON conversion failed in JSONDecoder", decodingError.localizedDescription)
+                    NSLog("JSON decoding failed: %@", decodingError.localizedDescription)
                     completion(.failure(.responseParseError(decodingError)))
                 } catch {
                     completion(.failure(.responseParseError(error)))
@@ -188,12 +184,8 @@ public class QuestionBookmarkManager {
             case .failure(let error):
                 switch error { // error is OAuthSwiftError
                 case .requestError(let e, let request):
-                    //requestError[Error Domain=NSURLErrorDomain Code=404 "" UserInfo={Response-Body={"url":"...","message":"Bookmark is not found"}, NSErrorFailingURLKey=http://api.b.hatena.ne.jp/1/my/bookmark?url=..., Response-Headers={...
-                    print("A request error: request = \(request)")
+                    NSLog("Request error: %@", request.debugDescription)
                     let nsError = e as NSError
-                    if let s = nsError.userInfo["Response-Body"] {
-                        print(s)
-                    }
                     if let response = nsError.userInfo[OAuthSwiftError.ResponseKey] as? HTTPURLResponse {
                         let data = nsError.userInfo[OAuthSwiftError.ResponseDataKey] as? Data ?? Data()
                         completion(.failure(.httpStatus(code: response.statusCode, data: data)))
@@ -201,8 +193,7 @@ public class QuestionBookmarkManager {
                         completion(Result.failure(.connectionError(e)))
                     }
                 default:
-                    print("The others' error:")
-                    print(error)
+                    NSLog("Unexpected error: %@", error.localizedDescription)
                     completion(.failure(.connectionError(error)))
                 }
             }
