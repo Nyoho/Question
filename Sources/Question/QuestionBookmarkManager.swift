@@ -11,6 +11,10 @@ import OAuthSwift
 import KeychainAccess
 import AppKit
 
+public extension Notification.Name {
+    static let questionAuthenticationRequired = Notification.Name("questionAuthenticationRequired")
+}
+
 private let questionBookmarkManagerInstance: QuestionBookmarkManager = QuestionBookmarkManager()
 
 public class QuestionBookmarkManager {
@@ -191,6 +195,9 @@ public class QuestionBookmarkManager {
                     let nsError = e as NSError
                     if let response = nsError.userInfo[OAuthSwiftError.ResponseKey] as? HTTPURLResponse {
                         let data = nsError.userInfo[OAuthSwiftError.ResponseDataKey] as? Data ?? Data()
+                        if response.statusCode == 401 {
+                            NotificationCenter.default.post(name: .questionAuthenticationRequired, object: nil)
+                        }
                         completion(.failure(.httpStatus(code: response.statusCode, data: data)))
                     } else {
                         completion(Result.failure(.connectionError(e)))
