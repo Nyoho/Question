@@ -138,10 +138,17 @@ public class QuestionBookmarkManager {
         }
     }
 
-    public func signOut() { // rename to logout?
+    public func signOut(completion: (() -> Void)? = nil) {
         keychain["credential"] = nil
+        if let username = username {
+            keychain[data: username] = nil
+        }
         let vc = QuestionAuthViewController(nibName: "QuestionAuthViewController", bundle: Bundle.module)
-        vc.clearCookiesAndSessions()
+        vc.clearCookiesAndSessions {
+            DispatchQueue.main.async {
+                completion?()
+            }
+        }
 
         oauthswift.client.credential.oauthToken = ""
         oauthswift.client.credential.oauthTokenSecret = ""
