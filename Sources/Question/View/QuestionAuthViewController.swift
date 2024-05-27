@@ -65,11 +65,13 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
         decisionHandler(.allow)
     }
     
-    public func clearCookiesAndSessions() {
+    public func clearCookiesAndSessions(completion: (() -> Void)? = nil) {
         let dataTypes = Set([WKWebsiteDataTypeCookies,
                              WKWebsiteDataTypeLocalStorage, WKWebsiteDataTypeSessionStorage,
                              WKWebsiteDataTypeWebSQLDatabases, WKWebsiteDataTypeIndexedDBDatabases])
-        WKWebsiteDataStore.default().removeData(ofTypes: dataTypes, modifiedSince: Date.distantPast, completionHandler: {})
+        WKWebsiteDataStore.default().removeData(ofTypes: dataTypes, modifiedSince: Date.distantPast) {
+            completion?()
+        }
     }
     
     public func close(_ sender: Any?) {
