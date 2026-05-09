@@ -54,8 +54,9 @@ public class QuestionBookmarkManager {
         }
     }
     
-    // callback URL に、はてなAPIがカスタムURLスキームを受け付けないため、HTTPSサイトを使用
-    static let callbackURL = URL(string: "https://nyoho.jp/hatena")!
+    // Hatena OAuth accepts HTTP callback URLs. The embedded WKWebView intercepts
+    // this loopback redirect before any network request is made.
+    static let callbackURL = URL(string: "http://localhost/oauth-callback")!
 
     var oauthswift = OAuth1Swift(
         consumerKey:     "consumerKey",

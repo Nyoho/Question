@@ -24,20 +24,17 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
         super.viewDidLoad()
         
         let configuration = WKWebViewConfiguration()
-        webView = WKWebView(frame: self.view.frame, configuration: configuration)
-//        webView = WKWebView(frame: CGRect(x: 0, y: 0, width: 600, height: 400), configuration: configuration)
-//        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView = WKWebView(frame: view.bounds, configuration: configuration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
         webView.navigationDelegate = self
         webView.uiDelegate = self
         view.addSubview(webView)
-        // topAnchor only available in version 10.11
-//        [webView.topAnchor.constraint(equalTo: view.topAnchor),
-//         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//         webView.leftAnchor.constraint(equalTo: view.leftAnchor),
-//         webView.rightAnchor.constraint(equalTo: view.rightAnchor)].forEach  {
-//            anchor in
-//            anchor.isActive = true
-//        }  // end forEach
+        NSLayoutConstraint.activate([
+            webView.topAnchor.constraint(equalTo: view.topAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            webView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            webView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
 
     }
     
@@ -49,7 +46,7 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
     public func webView(_ sender: WKWebView, didFinish navigation: WKNavigation!) {
         if let url = sender.url {
             let u = url.absoluteString
-            if u.hasPrefix(QuestionBookmarkManager.callbackURL.absoluteString) {
+            if Self.isOAuthCallbackURL(url) {
                 OAuthSwift.handle(url: url)
             } else if url.host == "www.hatena.ne.jp" && !u.contains("/oauth/") {
                 // ログイン後にトップページに飛ばされるようになった? そのときはOAuthフローを再開することに
@@ -62,7 +59,24 @@ public class QuestionAuthViewController: NSViewController, OAuthSwiftURLHandlerT
     }
 
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url, Self.isOAuthCallbackURL(url) {
+            OAuthSwift.handle(url: url)
+            decisionHandler(.cancel)
+            return
+        }
         decisionHandler(.allow)
+    }
+
+    static func isOAuthCallbackURL(_ url: URL, callbackURL: URL = QuestionBookmarkManager.callbackURL) -> Bool {
+        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),
+              let callbackComponents = URLComponents(url: callbackURL, resolvingAgainstBaseURL: false) else {
+            return false
+        }
+
+        return urlComponents.scheme == callbackComponents.scheme
+            && urlComponents.host == callbackComponents.host
+            && urlComponents.port == callbackComponents.port
+            && urlComponents.path == callbackComponents.path
     }
     
     public func clearCookiesAndSessions(completion: (() -> Void)? = nil) {
