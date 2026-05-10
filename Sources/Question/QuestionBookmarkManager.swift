@@ -18,6 +18,7 @@ public extension Notification.Name {
 private let questionBookmarkManagerInstance: QuestionBookmarkManager = QuestionBookmarkManager()
 
 public class QuestionBookmarkManager {
+    private static let credentialKey = "credential"
     var consumerKey = ""
     var consumerSecret = ""
     public var authorized: Bool {
@@ -38,17 +39,23 @@ public class QuestionBookmarkManager {
     }
     var credential: OAuthSwiftCredential? {
         get {
-            if let username = self.username, let data = keychain[data: username] {
-                do {
-                    let credential = try JSONDecoder().decode(OAuthSwiftCredential.self, from: data)
-                    oauthswift.client = OAuthSwiftClient(credential: credential)
-                    return credential
-
-                } catch {
-                    NSLog("Cannot retrieve your credential: %@", error.localizedDescription)
-                    return nil
-                }
+            let data: Data?
+            if let username = self.username, let userData = keychain[data: username] {
+                data = userData
             } else {
+                data = keychain[data: Self.credentialKey]
+            }
+
+            guard let credentialData = data else {
+                return nil
+            }
+
+            do {
+                let credential = try JSONDecoder().decode(OAuthSwiftCredential.self, from: credentialData)
+                oauthswift.client = OAuthSwiftClient(credential: credential)
+                return credential
+            } catch {
+                NSLog("Cannot retrieve your credential: %@", error.localizedDescription)
                 return nil
             }
         }
@@ -96,24 +103,32 @@ public class QuestionBookmarkManager {
         )
         oauthswift.authorizeURLHandler = viewController
 
-        // ログイン完了後にOAuthフローを再開するため
-        viewController.onLoginCompleted = { [weak self] in
-            self?.authenticate(viewController: viewController)
+        viewController.onRetryRequested = { [weak self, weak viewController] in
+            guard let viewController = viewController else { return }
+
+            DispatchQueue.main.async {
+                self?.authenticate(viewController: viewController)
+            }
         }
 
         oauthswift.authorize(withCallbackURL: Self.callbackURL) { result in
             switch result {
             case .success(let (credential, _, parameters)):
-                guard let name = parameters["url_name"] as? String else { return }
-                UserDefaults.standard.set(name, forKey: "urlName")
+                let name = parameters["url_name"] as? String
+                if let name = name {
+                    UserDefaults.standard.set(name, forKey: "urlName")
+                }
 
-                guard let displayName = parameters["display_name"] as? String else { return }
-                UserDefaults.standard.set(displayName, forKey: "displayName")
+                if let displayName = parameters["display_name"] as? String {
+                    UserDefaults.standard.set(displayName, forKey: "displayName")
+                }
 
                 do {
                     let d = try JSONEncoder().encode(credential)
-                    let u = self.username!
-                    self.keychain[data: u] = d
+                    self.keychain[data: Self.credentialKey] = d
+                    if let name = name {
+                        self.keychain[data: name] = d
+                    }
                 } catch {
                     NSLog("Credential encoding error: %@", error.localizedDescription)
                 }
@@ -126,6 +141,7 @@ public class QuestionBookmarkManager {
                 default:
                     break
                 }
+                viewController.showAuthenticationError()
             }
         }
     }
@@ -140,7 +156,7 @@ public class QuestionBookmarkManager {
     }
 
     public func signOut(completion: (() -> Void)? = nil) {
-        keychain["credential"] = nil
+        keychain[data: Self.credentialKey] = nil
         if let username = username {
             keychain[data: username] = nil
         }

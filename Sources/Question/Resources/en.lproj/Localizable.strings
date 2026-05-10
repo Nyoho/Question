@@ -9,3 +9,10 @@
 "bookmark_loading_users" = "Loading…";
 "bookmark_delete_tooltip" = "Delete bookmark";
 "tag_input_placeholder" = "Enter tag to add";
+"auth_status_sign_in" = "Sign in to Hatena";
+"auth_status_continuing" = "Continuing authentication…";
+"auth_status_retrying" = "Retrying authentication…";
+"auth_status_failed" = "Authentication failed.";
+"auth_status_token_rejected" = "Authentication token was rejected.";
+"auth_retry_button" = "Retry";
+"auth_cancel_button" = "Cancel";

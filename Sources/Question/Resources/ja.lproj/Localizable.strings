@@ -9,3 +9,10 @@
 "bookmark_loading_users" = "読み込み中…";
 "bookmark_delete_tooltip" = "ブックマークを削除";
 "tag_input_placeholder" = "タグを入力して追加";
+"auth_status_sign_in" = "はてなにログイン";
+"auth_status_continuing" = "認証を続行中…";
+"auth_status_retrying" = "認証を再試行中…";
+"auth_status_failed" = "認証に失敗しました。";
+"auth_status_token_rejected" = "認証トークンが拒否されました。";
+"auth_retry_button" = "再試行";
+"auth_cancel_button" = "キャンセル";
